@@ -1,0 +1,42 @@
+name: m_dharura
+description: m-Dharura
+
+publish_to: none
+version: 19.3.1+64
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_local_notifications: ^14.1.1
+  get: ^4.6.1
+  intl: ^0.17.0
+  flutter_dotenv: ^5.0.2
+  json_annotation: ^4.4.0
+  url_launcher: ^6.0.18
+  hive: ^2.0.5
+  hive_flutter: ^1.1.0
+  package_info_plus: ^4.0.2
+  charts_flutter: ^0.12.0
+  dio: ^5.2.1+1
+  pretty_dio_logger: ^1.3.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  build_runner: ^2.1.7
+  hive_generator: ^2.0.0
+  flutter_lints: ^2.0.1
+  json_serializable: ^6.1.4
+
+flutter:
+  uses-material-design: true
+  assets:
+    - .env
+    - assets/images/logo.png
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins-Regular.ttf
