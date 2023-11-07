@@ -11,14 +11,7 @@ class RoleItemWidget extends StatelessWidget {
   final Function? onRemove, onRoleChanged, onStatusChanged;
   final bool showManage;
 
-  const RoleItemWidget(
-      {Key? key,
-      required this.role,
-      this.onStatusChanged,
-      this.onRoleChanged,
-      this.onRemove,
-      this.showManage = true})
-      : super(key: key);
+  const RoleItemWidget({Key? key, required this.role, this.onStatusChanged, this.onRoleChanged, this.onRemove, this.showManage = true}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => Container(
@@ -42,11 +35,9 @@ class RoleItemWidget extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
               ),
-              subtitle: Text(
-                  '${role.status.capitalize} · ${role.spot} · ${Util.formatPhoneNumber(role.user.phoneNumber)}'),
+              subtitle: Text('${role.status.capitalize} · ${role.spot} · ${Util.formatPhoneNumber(role.user.phoneNumber)}'),
               onLongPress: () async => await _onTap(context),
-              onTap: () async =>
-                  await Get.toNamed('${Routes.kHistory}${role.user.id}'),
+              onTap: () async => await Get.toNamed('${Routes.kHistory}${role.user.id}'),
               trailing: IconButton(
                 icon: const Icon(Icons.more_vert),
                 onPressed: () async => await _onTap(context),
@@ -75,8 +66,7 @@ class RoleItemWidget extends StatelessWidget {
                       width: 16,
                     ),
                     ElevatedButton(
-                      onPressed: () async =>
-                          await Get.toNamed('${Routes.kUnit}${role.unit.id}'),
+                      onPressed: () async => await Get.toNamed('${Routes.kUnit}${role.unit.id}'),
                       child: const Text('View'),
                     )
                   ],
@@ -209,24 +199,20 @@ class RoleItemWidget extends StatelessWidget {
                 },
               ),
               const Divider(),
-              ...spots(role.unit.type)
-                  .map(
-                    (e) => ListTile(
-                      leading: Icon(e == role.spot
-                          ? Icons.check_box
-                          : Icons.check_box_outline_blank),
-                      title: Text(
-                        '$e${e == role.spot ? ' (Current)' : ''}',
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      ),
-                      onTap: () async {
-                        Get.back();
+              ...spots(role.unit.type).map(
+                (e) => ListTile(
+                  leading: Icon(e == role.spot ? Icons.check_box : Icons.check_box_outline_blank),
+                  title: Text(
+                    '$e${e == role.spot ? ' (Current)' : ''}',
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                  onTap: () async {
+                    Get.back();
 
-                        onRoleChanged!(e);
-                      },
-                    ),
-                  )
-                  .toList(),
+                    onRoleChanged!(e);
+                  },
+                ),
+              ),
               const Divider(),
               ListTile(
                 title: Text(

@@ -1,6 +1,6 @@
-# agizo
+# m-Dharura
 
-Agizo Client App
+m-Dharura Client App
 
 ## Getting Started
 
