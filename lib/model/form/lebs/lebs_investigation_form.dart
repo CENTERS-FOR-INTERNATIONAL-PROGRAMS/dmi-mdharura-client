@@ -23,10 +23,12 @@ class LebsInvestigationForm extends BaseObject {
   String? measureVentilation;
   String? additionalInformation;
   String? riskClassification;
+  List<String>? eventCategories;
+  String? isEventInfectious;
+  List<String>? systemsAffectedByEvent;
   List<String>? responseActivities;
 
-  static LebsInvestigationForm fromJson(dynamic json) =>
-      _$LebsInvestigationFormFromJson(json);
+  static LebsInvestigationForm fromJson(dynamic json) => _$LebsInvestigationFormFromJson(json);
 
   @override
   String toString() => toJson().toString();

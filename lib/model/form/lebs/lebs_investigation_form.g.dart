@@ -37,6 +37,14 @@ LebsInvestigationForm _$LebsInvestigationFormFromJson(
       ..measureVentilation = json['measureVentilation'] as String?
       ..additionalInformation = json['additionalInformation'] as String?
       ..riskClassification = json['riskClassification'] as String?
+      ..eventCategories = (json['eventCategories'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList()
+      ..isEventInfectious = json['isEventInfectious'] as String?
+      ..systemsAffectedByEvent =
+          (json['systemsAffectedByEvent'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList()
       ..responseActivities = (json['responseActivities'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList();
@@ -73,6 +81,9 @@ Map<String, dynamic> _$LebsInvestigationFormToJson(
   writeNotNull('measureVentilation', instance.measureVentilation);
   writeNotNull('additionalInformation', instance.additionalInformation);
   writeNotNull('riskClassification', instance.riskClassification);
+  writeNotNull('eventCategories', instance.eventCategories);
+  writeNotNull('isEventInfectious', instance.isEventInfectious);
+  writeNotNull('systemsAffectedByEvent', instance.systemsAffectedByEvent);
   writeNotNull('responseActivities', instance.responseActivities);
   return val;
 }

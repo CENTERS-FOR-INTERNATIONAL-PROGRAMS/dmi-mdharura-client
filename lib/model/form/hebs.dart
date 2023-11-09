@@ -12,7 +12,7 @@ class Hebs extends BaseObject {
   VerificationForm? verificationForm;
   InvestigationForm? investigationForm;
   ResponseForm? responseForm;
-  EscalationForm ?escalationForm;
+  EscalationForm? escalationForm;
 
   static Hebs fromJson(dynamic json) => _$HebsFromJson(json);
 
