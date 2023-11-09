@@ -18,7 +18,7 @@ class LebsInvestigationFormController extends GetxController {
   var isFetching = false.obs;
   var isAdding = false.obs;
   var pages = [0].obs;
-  final int total = 18;
+  final int total = 21;
 
   Rx<LebsInvestigationForm> form = Rx(LebsInvestigationForm());
 
@@ -64,7 +64,7 @@ class LebsInvestigationFormController extends GetxController {
         'lebs',
         'investigation',
         form.toJson(),
-        version: 'v2',
+        version: 'v3',
       ))
           .data!
           .task;
@@ -77,10 +77,8 @@ class LebsInvestigationFormController extends GetxController {
         await Get.dialog(
           DialogWidget(
             title: 'Submit form using SMS?',
-            content:
-                'You are about to submit this form using SMS. Please confirm',
-            onConfirm: () async => await Util.sms(kSmsShortCode,
-                '${kSmsPrefix}li ${signal.value!.trim()} ${jsonEncode(form.value.toJson().trim())}'),
+            content: 'You are about to submit this form using SMS. Please confirm',
+            onConfirm: () async => await Util.sms(kSmsShortCode, '${kSmsPrefix}li ${signal.value!.trim()} ${jsonEncode(form.value.toJson().trim())}'),
           ),
         );
       }
@@ -174,15 +172,33 @@ class LebsInvestigationFormController extends GetxController {
             page += 1;
             break;
           case 14:
-            if (f.additionalInformation == null ||
-                f.additionalInformation!.isEmpty) throw 'Please type';
+            if (f.additionalInformation == null || f.additionalInformation!.isEmpty) throw 'Please type';
             page += 1;
             break;
           case 15:
             if (f.riskClassification == null) throw 'Please select';
             page += 1;
             break;
+
           case 16:
+            if (f.eventCategories == null || f.eventCategories!.isEmpty) throw 'Please select';
+            page += 1;
+            break;
+          case 17:
+            if (f.isEventInfectious == null) throw 'Please select';
+            if (f.isEventInfectious!.toLowerCase() == 'yes') {
+              page += 1;
+              break;
+            }
+            page += 2;
+            break;
+          case 18:
+            if (f.systemsAffectedByEvent == null || f.systemsAffectedByEvent!.isEmpty) {
+              throw 'Please select';
+            }
+            page += 1;
+            break;
+          case 19:
             if (f.responseActivities == null || f.responseActivities!.isEmpty) {
               throw 'Please select';
             }
@@ -213,8 +229,7 @@ class LebsInvestigationFormController extends GetxController {
     await Get.dialog(
       DialogWidget(
         title: 'Save this form?',
-        content:
-            'You are about to save this form. You will be able to edit and submit it later. Please confirm',
+        content: 'You are about to save this form. You will be able to edit and submit it later. Please confirm',
         onConfirm: () async {
           try {
             var box = await Db.pending();
