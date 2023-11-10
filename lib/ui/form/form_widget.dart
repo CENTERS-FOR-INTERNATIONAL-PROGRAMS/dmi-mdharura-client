@@ -7,6 +7,7 @@ import 'package:m_dharura/ui/form/_/escalation/escalation_form_widget.dart';
 import 'package:m_dharura/ui/form/_/investigation/investigation_form_widget.dart';
 import 'package:m_dharura/ui/form/_/response/response_form_widget.dart';
 import 'package:m_dharura/ui/form/_/signal/signal_form_widget.dart';
+import 'package:m_dharura/ui/form/_/summary/summary_form_widget.dart';
 import 'package:m_dharura/ui/form/_/verification/verification_form_widget.dart';
 import 'package:m_dharura/ui/form/form_controller.dart';
 import 'package:m_dharura/ui/form/lebs/escalation/lebs_escalation_form_widget.dart';
@@ -64,6 +65,8 @@ class FormWidget extends ResponsiveWidget<FormController> {
             return ResponseFormWidget(type: type, signalId: signalId);
           case FormType.kEscalation:
             return EscalationFormWidget(type: type, signalId: signalId);
+          case FormType.kSummary:
+            return SummaryFormWidget(type: type, signalId: signalId);
         }
         break;
       case FormType.kLEBS:
@@ -78,6 +81,8 @@ class FormWidget extends ResponsiveWidget<FormController> {
             return LebsResponseFormWidget(signalId: signalId);
           case FormType.kEscalation:
             return LebsEscalationFormWidget(signalId: signalId);
+          case FormType.kSummary:
+            return SummaryFormWidget(type: type, signalId: signalId);
         }
         break;
     }
@@ -85,8 +90,7 @@ class FormWidget extends ResponsiveWidget<FormController> {
     return MessageWidget(
       title: 'Form not available',
       subtitle: 'Form not available',
-      description:
-          'Update your app. If the problem persists contact your supervisor.',
+      description: 'Update your app. If the problem persists contact your supervisor.',
       adjust: false,
     );
   }

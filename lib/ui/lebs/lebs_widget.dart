@@ -33,15 +33,11 @@ class LebsWidget extends ResponsiveWidget<LebsController> {
             ListTile(
               title: Text(
                 'LEBS Signal',
-                style: Theme.of(screen.context)
-                    .textTheme
-                    .bodyLarge
-                    ?.copyWith(fontWeight: FontWeight.bold),
+                style: Theme.of(screen.context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
               ),
               subtitle: const Text('Report LEBS signal'),
               trailing: ElevatedButton(
-                onPressed: () async => await Get.toNamed(
-                    '${Routes.kForm}${FormType.kLEBS}/${FormType.kSignal}'),
+                onPressed: () async => await Get.toNamed('${Routes.kForm}${FormType.kLEBS}/${FormType.kSignal}'),
                 child: const Text('Report'),
               ),
             ),
@@ -57,8 +53,7 @@ class LebsWidget extends ResponsiveWidget<LebsController> {
               ),
               subtitle: const Text('Fill LEBS verification form'),
               trailing: ElevatedButton(
-                onPressed: () async => await Get.toNamed(
-                    '${Routes.kForm}${FormType.kLEBS}/${FormType.kVerification}'),
+                onPressed: () async => await Get.toNamed('${Routes.kForm}${FormType.kLEBS}/${FormType.kVerification}'),
                 child: const Text('Start'),
               ),
             ),
@@ -68,15 +63,11 @@ class LebsWidget extends ResponsiveWidget<LebsController> {
             ListTile(
               title: Text(
                 'LEBS Risk Assessment',
-                style: Theme.of(screen.context)
-                    .textTheme
-                    .bodyLarge
-                    ?.copyWith(fontWeight: FontWeight.bold),
+                style: Theme.of(screen.context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
               ),
               subtitle: const Text('Fill LEBS risk assessment form'),
               trailing: ElevatedButton(
-                onPressed: () async => await Get.toNamed(
-                    '${Routes.kForm}${FormType.kLEBS}/${FormType.kInvestigation}'),
+                onPressed: () async => await Get.toNamed('${Routes.kForm}${FormType.kLEBS}/${FormType.kInvestigation}'),
                 child: const Text('Start'),
               ),
             ),
@@ -86,15 +77,11 @@ class LebsWidget extends ResponsiveWidget<LebsController> {
             ListTile(
               title: Text(
                 'LEBS Response',
-                style: Theme.of(screen.context)
-                    .textTheme
-                    .bodyLarge
-                    ?.copyWith(fontWeight: FontWeight.bold),
+                style: Theme.of(screen.context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
               ),
               subtitle: const Text('Fill LEBS response form'),
               trailing: ElevatedButton(
-                onPressed: () async => await Get.toNamed(
-                    '${Routes.kForm}${FormType.kLEBS}/${FormType.kResponse}'),
+                onPressed: () async => await Get.toNamed('${Routes.kForm}${FormType.kLEBS}/${FormType.kResponse}'),
                 child: const Text('Start'),
               ),
             ),
@@ -114,6 +101,22 @@ class LebsWidget extends ResponsiveWidget<LebsController> {
                 child: Text('Start'),
               ),
             ),*/
+            const SizedBox(
+              height: 8,
+            ),
+            ListTile(
+              title: Text(
+                'LEBS Summary',
+                style: Theme.of(screen.context).textTheme.bodyLarge?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
+              subtitle: const Text('Fill LEBS summary form'),
+              trailing: ElevatedButton(
+                onPressed: () async => await Get.toNamed('${Routes.kForm}${FormType.kLEBS}/${FormType.kSummary}'),
+                child: const Text('Start'),
+              ),
+            ),
             const SizedBox(
               height: 24,
             ),

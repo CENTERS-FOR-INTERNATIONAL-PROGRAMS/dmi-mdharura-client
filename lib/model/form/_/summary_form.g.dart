@@ -17,7 +17,7 @@ SummaryForm _$SummaryFormFromJson(Map<String, dynamic> json) => SummaryForm()
       : User.fromJson(json['user'] as Map<String, dynamic>)
   ..eventStatus = json['eventStatus'] as String?
   ..escalatedTo = json['escalatedTo'] as String?
-  ..eventCause = json['eventCause'] as String?;
+  ..cause = json['cause'] as String?;
 
 Map<String, dynamic> _$SummaryFormToJson(SummaryForm instance) {
   final val = <String, dynamic>{};
@@ -34,6 +34,6 @@ Map<String, dynamic> _$SummaryFormToJson(SummaryForm instance) {
   writeNotNull('user', instance.user);
   writeNotNull('eventStatus', instance.eventStatus);
   writeNotNull('escalatedTo', instance.escalatedTo);
-  writeNotNull('eventCause', instance.eventCause);
+  writeNotNull('cause', instance.cause);
   return val;
 }

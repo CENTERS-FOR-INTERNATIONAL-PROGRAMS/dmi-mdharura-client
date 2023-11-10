@@ -9,5 +9,6 @@ class FormType {
   static const kInvestigation = 'investigation';
   static const kResponse = 'response';
   static const kEscalation = 'escalation';
+  static const kSummary = 'summary';
   static const kRequest = 'request';
 }
