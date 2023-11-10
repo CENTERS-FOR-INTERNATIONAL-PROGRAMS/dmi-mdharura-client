@@ -10,7 +10,7 @@ import 'package:m_dharura/helper/extension.dart';
 import 'package:m_dharura/helper/session.dart';
 import 'package:m_dharura/helper/signal.dart';
 import 'package:m_dharura/helper/util.dart';
-import 'package:m_dharura/model/form/_/investigation_form.dart';
+import 'package:m_dharura/model/form/_/summary_form.dart';
 import 'package:m_dharura/model/pending.dart';
 import 'package:m_dharura/ui/_/dialog_widget.dart';
 import 'package:m_dharura/ui/pending/pending_controller.dart';
@@ -18,17 +18,17 @@ import 'package:m_dharura/ui/pending/pending_controller.dart';
 class SummaryFormController extends GetxController {
   var isFetching = false.obs;
   var isAdding = false.obs;
-  final int total = 27;
+  final int total = 4;
   var pages = [0].obs;
 
-  Rx<InvestigationForm> form = Rx(InvestigationForm());
+  Rx<SummaryForm> form = Rx(SummaryForm());
 
   final _taskApi = Get.put(TaskApi());
 
   final String? signalId;
   final String type;
 
-  InvestigationFormController({required this.type, this.signalId});
+  SummaryFormController({required this.type, this.signalId});
 
   Rx<String?> signal = Rx(null);
 
@@ -41,10 +41,10 @@ class SummaryFormController extends GetxController {
     try {
       var box = await Db.pending();
 
-      var pending = box.get('${signal.value}_investigation');
+      var pending = box.get('${signal.value}_summary');
 
       if (pending != null) {
-        form.value = InvestigationForm.fromJson(pending.form);
+        form.value = SummaryForm.fromJson(pending.form);
       }
     } catch (e) {
       if (kDebugMode) {
@@ -64,9 +64,9 @@ class SummaryFormController extends GetxController {
       var task = (await _taskApi.updateForm(
         signal.value!.trim(),
         type,
-        'investigation',
+        'summary',
         form.toJson(),
-        version: 'v2',
+        version: 'v1',
       ))
           .data!
           .task;
@@ -105,125 +105,22 @@ class SummaryFormController extends GetxController {
             page += 1;
             break;
           case 1:
-            if (f.dateSCDSCInformed == null) throw 'Please select';
-            page += 1;
-            break;
-          case 2:
-            if (f.dateInvestigationStarted == null) throw 'Please select';
-            page += 1;
-            break;
-          case 3:
-            if (f.dateEventStarted == null) throw 'Please select';
-            page += 1;
-            break;
-          case 4:
-            if (f.symptoms == null || f.symptoms!.isEmpty) throw 'Please type';
-            page += 1;
-            break;
-          case 5:
-            if (f.humansCases == null) throw 'Please type';
-            page += 1;
-            break;
-          case 6:
-            if (f.humansCasesHospitalized == null) throw 'Please type';
-            page += 1;
-            break;
-          case 7:
-            if (f.humansDead == null) throw 'Please type';
-            page += 1;
-            break;
-          case 8:
-            if (f.animalsCases == null) throw 'Please type';
-            page += 1;
-            break;
-          case 9:
-            if (f.animalsDead == null) throw 'Please type';
-            page += 1;
-            break;
-          case 10:
-            if (f.isCauseKnown == null) throw 'Please select';
-            if (f.isCauseKnown!.toLowerCase() == 'no') {
-              page += 2;
-              break;
-            }
-            page += 1;
-            break;
-          case 11:
-            if (f.cause == null || f.cause!.isEmpty) throw 'Please type';
-            page += 1;
-            break;
-          case 12:
-            if (f.isLabSamplesCollected == null) throw 'Please select';
-            if (f.isLabSamplesCollected!.toLowerCase() == 'yes') {
-              page += 1;
-              break;
-            }
-            page += 4;
-            break;
-          case 13:
-            if (f.dateSampleCollected == null) throw 'Please select';
-            page += 1;
-            break;
-          case 14:
-            if (f.labResults == null || f.labResults!.isEmpty) {
-              throw 'Please type';
-            }
-            page += 1;
-            break;
-          case 15:
-            if (f.dateLabResultsReceived == null) throw 'Please select';
-            page += 1;
-            break;
-          case 16:
-            if (f.isNewCasedReportedFromInitialArea == null) {
-              throw 'Please select';
-            }
-            page += 1;
-            break;
-          case 17:
-            if (f.isNewCasedReportedFromNewAreas == null) throw 'Please select';
-            page += 1;
-            break;
-          case 18:
-            if (f.isEventSettingPromotingSpread == null) throw 'Please select';
-            page += 1;
-            break;
-          case 19:
-            if (f.additionalInformation == null || f.additionalInformation!.isEmpty) throw 'Please type';
-            page += 1;
-            break;
-          case 20:
-            if (f.riskClassification == null) throw 'Please select';
-            page += 1;
-            break;
-          case 21:
-            if (f.eventCategories == null || f.eventCategories!.isEmpty) throw 'Please select';
-            page += 1;
-            break;
-          case 22:
-            if (f.isEventInfectious == null) throw 'Please select';
-            if (f.isEventInfectious!.toLowerCase() == 'yes') {
+            if (f.eventStatus == null) throw 'Please select';
+            if (f.eventStatus!.toLowerCase() == 'escalated') {
               page += 1;
               break;
             }
             page += 2;
             break;
-          case 23:
-            if (f.systemsAffectedByEvent == null || f.systemsAffectedByEvent!.isEmpty) {
-              throw 'Please select';
-            }
+          case 2:
+            if (f.escalatedTo == null) throw 'Please type';
             page += 1;
             break;
-          case 24:
-            if (f.responseActivities == null || f.responseActivities!.isEmpty) {
-              throw 'Please select';
-            }
+          case 3:
+            if (f.cause == null) throw 'Please type';
             page += 1;
             break;
-          case 25:
-            if (f.dateSCMOHInformed == null) throw 'Please select';
-            page += 1;
-            break;
+
           default:
             page += 1;
         }
@@ -255,11 +152,11 @@ class SummaryFormController extends GetxController {
             var box = await Db.pending();
 
             await box.put(
-                '${signal.value}_investigation',
+                '${signal.value}_summary',
                 Pending()
                   ..signalId = signal.value!
                   ..type = type
-                  ..subType = 'investigation'
+                  ..subType = 'summary'
                   ..form = form.value.toJson());
 
             Get.put(

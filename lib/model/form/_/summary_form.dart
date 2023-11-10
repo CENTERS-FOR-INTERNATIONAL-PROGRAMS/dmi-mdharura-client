@@ -9,7 +9,7 @@ class SummaryForm extends BaseObject {
   User? user;
   String? eventStatus;
   String? escalatedTo;
-  String? eventCause;
+  String? cause;
 
   static SummaryForm fromJson(dynamic json) => _$SummaryFormFromJson(json);
 
