@@ -18,7 +18,7 @@ import 'package:m_dharura/ui/pending/pending_controller.dart';
 class SummaryFormController extends GetxController {
   var isFetching = false.obs;
   var isAdding = false.obs;
-  final int total = 4;
+  final int total = 5;
   var pages = [0].obs;
 
   Rx<SummaryForm> form = Rx(SummaryForm());
@@ -66,7 +66,7 @@ class SummaryFormController extends GetxController {
         type,
         'summary',
         form.toJson(),
-        version: 'v1',
+        version: 'v2',
       ))
           .data!
           .task;
