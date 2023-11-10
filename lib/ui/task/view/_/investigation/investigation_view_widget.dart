@@ -9,8 +9,7 @@ class InvestigationViewWidget extends ResponsiveWidget {
   final InvestigationForm form;
   final String type;
 
-  InvestigationViewWidget({Key? key, required this.form, required this.type})
-      : super(key: key);
+  InvestigationViewWidget({Key? key, required this.form, required this.type}) : super(key: key);
 
   @override
   bool get shouldAdjust => true;
@@ -42,13 +41,11 @@ class InvestigationViewWidget extends ResponsiveWidget {
                 value: form.dateEventStarted,
               ),
               InputWidget(
-                question:
-                    'Provide a brief description of the event e.g. signs, symptoms, occurrences, etc.',
+                question: 'Provide a brief description of the event e.g. signs, symptoms, occurrences, etc.',
                 value: form.symptoms,
               ),
               InputWidget(
-                question:
-                    'Number of people presenting with signs and symptoms ',
+                question: 'Number of people presenting with signs and symptoms ',
                 value: form.humansCases.toString(),
               ),
               InputWidget(
@@ -77,9 +74,7 @@ class InvestigationViewWidget extends ResponsiveWidget {
               ),
               SelectWidget(
                 question: 'Have the laboratory samples been taken?',
-                options: form.isLabSamplesCollected == null
-                    ? []
-                    : [form.isLabSamplesCollected!],
+                options: form.isLabSamplesCollected == null ? [] : [form.isLabSamplesCollected!],
               ),
               DateWidget(
                 question: 'Date of sample collection',
@@ -94,23 +89,16 @@ class InvestigationViewWidget extends ResponsiveWidget {
                 value: form.dateLabResultsReceived,
               ),
               SelectWidget(
-                question:
-                    'Are new cases still being reported from the initial area?',
-                options: form.isNewCasedReportedFromInitialArea == null
-                    ? []
-                    : [form.isNewCasedReportedFromInitialArea!],
+                question: 'Are new cases still being reported from the initial area?',
+                options: form.isNewCasedReportedFromInitialArea == null ? [] : [form.isNewCasedReportedFromInitialArea!],
               ),
               SelectWidget(
                 question: 'Are new cases still being reported from new areas?',
-                options: form.isNewCasedReportedFromNewAreas == null
-                    ? []
-                    : [form.isNewCasedReportedFromNewAreas!],
+                options: form.isNewCasedReportedFromNewAreas == null ? [] : [form.isNewCasedReportedFromNewAreas!],
               ),
               SelectWidget(
                 question: 'Does the event setting promote transmission?',
-                options: form.isEventSettingPromotingSpread == null
-                    ? []
-                    : [form.isEventSettingPromotingSpread!],
+                options: form.isEventSettingPromotingSpread == null ? [] : [form.isEventSettingPromotingSpread!],
               ),
               InputWidget(
                 question: 'Please provide additional information',
@@ -118,9 +106,19 @@ class InvestigationViewWidget extends ResponsiveWidget {
               ),
               SelectWidget(
                 question: 'How do you classify the risk of the event?',
-                options: form.riskClassification == null
-                    ? []
-                    : [form.riskClassification!],
+                options: form.riskClassification == null ? [] : [form.riskClassification!],
+              ),
+              SelectWidget(
+                question: 'Is the assessed event human, animal or environmental related?',
+                options: form.eventCategories ?? [],
+              ),
+              SelectWidget(
+                question: 'Is the event considered an infectious or non-infectious?',
+                options: form.isEventInfectious == null ? [] : [form.isEventInfectious!],
+              ),
+              SelectWidget(
+                question: 'If the event is infectious, which of the below systems are affected in your view?',
+                options: form.systemsAffectedByEvent ?? [],
               ),
               SelectWidget(
                 question: 'What are the recommended response activities?',

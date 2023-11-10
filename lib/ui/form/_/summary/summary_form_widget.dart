@@ -84,9 +84,9 @@ class SummaryFormWidget extends StatelessWidget {
                               hintText: 'Type...',
                               position: controller.pages.last,
                               total: controller.total,
-                              value: controller.form.value.escalatedTo.toString(),
+                              value: controller.form.value.escalatedTo,
                               onChanged: (value) => controller.form.update((val) => val?.escalatedTo = value),
-                              inputType: InputType.kInt,
+                              inputType: InputType.kText,
                             ),
                             InputWidget(
                               question: 'What is the cause?',
