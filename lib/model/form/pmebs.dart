@@ -7,8 +7,8 @@ part 'pmebs.g.dart';
 
 @JsonSerializable()
 class Pmebs extends BaseObject {
-  PmebsRequestForm ?requestForm;
-  PmebsReportForm ?reportForm;
+  PmebsRequestForm? requestForm;
+  PmebsReportForm? reportForm;
 
   static Pmebs fromJson(dynamic json) => _$PmebsFromJson(json);
 
