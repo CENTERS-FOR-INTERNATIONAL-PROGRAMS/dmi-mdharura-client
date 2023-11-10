@@ -37,20 +37,21 @@ class InvestigationForm extends BaseObject {
   String? isEventSettingPromotingSpread;
   String? additionalInformation;
   String? riskClassification;
+  List<String>? eventCategories;
+  String? isEventInfectious;
+  List<String>? systemsAffectedByEvent;
   List<String>? responseActivities;
   DateTime? dateSCMOHInformed;
 
   double humanAttackRate() => humansCasesHospitalized! * 100 / humansCases!;
 
-  double humanHospitalizationRate() =>
-      humansCasesHospitalized! * 100 / humansCases!;
+  double humanHospitalizationRate() => humansCasesHospitalized! * 100 / humansCases!;
 
   double humanFatalityRate() => humansDead! * 100 / humansCases!;
 
   double animalFatalityRate() => animalsDead! * 100 / animalsCases!;
 
-  static InvestigationForm fromJson(dynamic json) =>
-      _$InvestigationFormFromJson(json);
+  static InvestigationForm fromJson(dynamic json) => _$InvestigationFormFromJson(json);
 
   @override
   String toString() => toJson().toString();

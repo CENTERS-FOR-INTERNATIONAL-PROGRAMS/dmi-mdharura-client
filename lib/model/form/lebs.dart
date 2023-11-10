@@ -10,7 +10,7 @@ part 'lebs.g.dart';
 @JsonSerializable()
 class Lebs extends BaseObject {
   LebsVerificationForm? verificationForm;
-  LebsInvestigationForm ?investigationForm;
+  LebsInvestigationForm? investigationForm;
   LebsResponseForm? responseForm;
   LebsEscalationForm? escalationForm;
 

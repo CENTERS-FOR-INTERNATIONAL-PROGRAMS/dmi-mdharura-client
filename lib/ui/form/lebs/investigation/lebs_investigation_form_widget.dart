@@ -8,8 +8,7 @@ import 'package:m_dharura/ui/form/lebs/investigation/lebs_investigation_form_con
 class LebsInvestigationFormWidget extends StatelessWidget {
   final String? signalId;
 
-  const LebsInvestigationFormWidget({Key? key, required this.signalId})
-      : super(key: key);
+  const LebsInvestigationFormWidget({Key? key, required this.signalId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => GetX<LebsInvestigationFormController>(
@@ -59,26 +58,20 @@ class LebsInvestigationFormWidget extends StatelessWidget {
                               position: controller.pages.last,
                               total: controller.total,
                               value: controller.signal.value,
-                              onChanged: (value) =>
-                                  controller.signal.value = value,
+                              onChanged: (value) => controller.signal.value = value,
                               lines: 1,
                               textCapitalization: TextCapitalization.characters,
                             ),
                             DateWidget(
-                              onChanged: (value) => controller.form.update(
-                                  (val) =>
-                                      val?.dateInvestigationStarted = value),
+                              onChanged: (value) => controller.form.update((val) => val?.dateInvestigationStarted = value),
                               position: controller.pages.last,
-                              question:
-                                  'When did the investigation begin/start?',
-                              value: controller
-                                  .form.value.dateInvestigationStarted,
+                              question: 'When did the investigation begin/start?',
+                              value: controller.form.value.dateInvestigationStarted,
                               total: controller.total,
                               hintText: 'Select date',
                             ),
                             SelectWidget(
-                              question:
-                                  'What are the signs and symptoms that are being reported?',
+                              question: 'What are the signs and symptoms that are being reported?',
                               position: controller.pages.last,
                               total: controller.total,
                               values: controller.form.value.symptoms ?? [],
@@ -91,8 +84,7 @@ class LebsInvestigationFormWidget extends StatelessWidget {
                                 'Body weakness',
                                 'Other',
                               ],
-                              onChanged: (String value) =>
-                                  controller.form.update((val) {
+                              onChanged: (String value) => controller.form.update((val) {
                                 val?.symptoms ??= [];
 
                                 if (val!.symptoms!.contains(value)) {
@@ -108,240 +100,218 @@ class LebsInvestigationFormWidget extends StatelessWidget {
                               position: controller.pages.last,
                               total: controller.total,
                               value: controller.form.value.symptomsOther,
-                              onChanged: (String value) =>
-                                  controller.form.value.symptomsOther = value,
+                              onChanged: (String value) => controller.form.value.symptomsOther = value,
                             ),
                             SelectWidget(
-                              question:
-                                  'Does the event meet the COVID-19 working case definition?',
+                              question: 'Does the event meet the COVID-19 working case definition?',
                               position: controller.pages.last,
                               total: controller.total,
-                              values: controller.form.value
-                                          .isCovid19WorkingCaseDefinitionMet ==
-                                      null
+                              values: controller.form.value.isCovid19WorkingCaseDefinitionMet == null
                                   ? []
-                                  : [
-                                      controller.form.value
-                                          .isCovid19WorkingCaseDefinitionMet!
-                                    ],
+                                  : [controller.form.value.isCovid19WorkingCaseDefinitionMet!],
                               options: const [
                                 'Yes',
                                 'No',
                               ],
-                              onChanged: (String value) => controller.form
-                                  .update((val) =>
-                                      val?.isCovid19WorkingCaseDefinitionMet =
-                                          value),
+                              onChanged: (String value) => controller.form.update((val) => val?.isCovid19WorkingCaseDefinitionMet = value),
                             ),
                             SelectWidget(
-                              question:
-                                  'Have samples been taken for confirmation?',
+                              question: 'Have samples been taken for confirmation?',
                               position: controller.pages.last,
                               total: controller.total,
-                              values: controller
-                                          .form.value.isSamplesCollected ==
-                                      null
-                                  ? []
-                                  : [controller.form.value.isSamplesCollected!],
+                              values: controller.form.value.isSamplesCollected == null ? [] : [controller.form.value.isSamplesCollected!],
                               options: const [
                                 'Yes',
                                 'No',
                               ],
-                              onChanged: (String value) => controller.form
-                                  .update(
-                                      (val) => val?.isSamplesCollected = value),
+                              onChanged: (String value) => controller.form.update((val) => val?.isSamplesCollected = value),
                             ),
                             SelectWidget(
                               question: 'What are the results?',
                               position: controller.pages.last,
                               total: controller.total,
-                              values: controller.form.value.labResults == null
-                                  ? []
-                                  : [controller.form.value.labResults!],
+                              values: controller.form.value.labResults == null ? [] : [controller.form.value.labResults!],
                               options: const [
                                 'Positive',
                                 'Negative',
                                 'Pending',
                               ],
-                              onChanged: (String value) => controller.form
-                                  .update((val) => val?.labResults = value),
+                              onChanged: (String value) => controller.form.update((val) => val?.labResults = value),
                             ),
                             SelectWidget(
-                              question:
-                                  'Does the event setting promote spread?',
+                              question: 'Does the event setting promote spread?',
                               position: controller.pages.last,
                               total: controller.total,
-                              values: controller.form.value
-                                          .isEventSettingPromotingSpread ==
-                                      null
-                                  ? []
-                                  : [
-                                      controller.form.value
-                                          .isEventSettingPromotingSpread!
-                                    ],
+                              values: controller.form.value.isEventSettingPromotingSpread == null ? [] : [controller.form.value.isEventSettingPromotingSpread!],
                               options: const [
                                 'Yes',
                                 'No',
                               ],
-                              onChanged: (String value) => controller.form
-                                  .update((val) => val
-                                      ?.isEventSettingPromotingSpread = value),
+                              onChanged: (String value) => controller.form.update((val) => val?.isEventSettingPromotingSpread = value),
                             ),
                             SelectWidget(
-                              question:
-                                  'What is the status of the following COVID-19 pandemic prevention measures in the institution?\na. Hand hygiene',
+                              question: 'What is the status of the following COVID-19 pandemic prevention measures in the institution?\na. Hand hygiene',
                               position: controller.pages.last,
                               total: controller.total,
-                              values: controller
-                                          .form.value.measureHandHygiene ==
-                                      null
-                                  ? []
-                                  : [controller.form.value.measureHandHygiene!],
+                              values: controller.form.value.measureHandHygiene == null ? [] : [controller.form.value.measureHandHygiene!],
                               options: const [
                                 'Present',
                                 'Absent',
                               ],
-                              onChanged: (String value) => controller.form
-                                  .update(
-                                      (val) => val?.measureHandHygiene = value),
+                              onChanged: (String value) => controller.form.update((val) => val?.measureHandHygiene = value),
                             ),
                             SelectWidget(
                               question:
                                   'What is the status of the following COVID-19 pandemic prevention measures in the institution?\nb. Temperature screening',
                               position: controller.pages.last,
                               total: controller.total,
-                              values:
-                                  controller.form.value.measureTempScreening ==
-                                          null
-                                      ? []
-                                      : [
-                                          controller
-                                              .form.value.measureTempScreening!
-                                        ],
+                              values: controller.form.value.measureTempScreening == null ? [] : [controller.form.value.measureTempScreening!],
                               options: const [
                                 'Present',
                                 'Absent',
                               ],
-                              onChanged: (String value) => controller.form
-                                  .update((val) =>
-                                      val?.measureTempScreening = value),
+                              onChanged: (String value) => controller.form.update((val) => val?.measureTempScreening = value),
                             ),
                             SelectWidget(
-                              question:
-                                  'What is the status of the following COVID-19 pandemic prevention measures in the institution?\nc. Physical distancing',
+                              question: 'What is the status of the following COVID-19 pandemic prevention measures in the institution?\nc. Physical distancing',
                               position: controller.pages.last,
                               total: controller.total,
-                              values: controller.form.value
-                                          .measurePhysicalDistancing ==
-                                      null
-                                  ? []
-                                  : [
-                                      controller
-                                          .form.value.measurePhysicalDistancing!
-                                    ],
+                              values: controller.form.value.measurePhysicalDistancing == null ? [] : [controller.form.value.measurePhysicalDistancing!],
                               options: const [
                                 'Present',
                                 'Absent',
                               ],
-                              onChanged: (String value) => controller.form
-                                  .update((val) =>
-                                      val?.measurePhysicalDistancing = value),
+                              onChanged: (String value) => controller.form.update((val) => val?.measurePhysicalDistancing = value),
                             ),
                             SelectWidget(
-                              question:
-                                  'What is the status of the following COVID-19 pandemic prevention measures in the institution?\nd. Social distancing',
+                              question: 'What is the status of the following COVID-19 pandemic prevention measures in the institution?\nd. Social distancing',
                               position: controller.pages.last,
                               total: controller.total,
-                              values: controller
-                                          .form.value.measureSocialDistancing ==
-                                      null
-                                  ? []
-                                  : [
-                                      controller
-                                          .form.value.measureSocialDistancing!
-                                    ],
+                              values: controller.form.value.measureSocialDistancing == null ? [] : [controller.form.value.measureSocialDistancing!],
                               options: const [
                                 'Present',
                                 'Absent',
                               ],
-                              onChanged: (String value) => controller.form
-                                  .update((val) =>
-                                      val?.measureSocialDistancing = value),
+                              onChanged: (String value) => controller.form.update((val) => val?.measureSocialDistancing = value),
                             ),
                             SelectWidget(
-                              question:
-                                  'What is the status of the following COVID-19 pandemic prevention measures in the institution?\ne. Use of masks',
+                              question: 'What is the status of the following COVID-19 pandemic prevention measures in the institution?\ne. Use of masks',
                               position: controller.pages.last,
                               total: controller.total,
-                              values: controller.form.value.measureUseOfMasks ==
-                                      null
-                                  ? []
-                                  : [controller.form.value.measureUseOfMasks!],
+                              values: controller.form.value.measureUseOfMasks == null ? [] : [controller.form.value.measureUseOfMasks!],
                               options: const [
                                 'Present',
                                 'Absent',
                               ],
-                              onChanged: (String value) => controller.form
-                                  .update(
-                                      (val) => val?.measureUseOfMasks = value),
+                              onChanged: (String value) => controller.form.update((val) => val?.measureUseOfMasks = value),
                             ),
                             SelectWidget(
-                              question:
-                                  'What is the status of the following COVID-19 pandemic prevention measures in the institution?\nf. Ventilation',
+                              question: 'What is the status of the following COVID-19 pandemic prevention measures in the institution?\nf. Ventilation',
                               position: controller.pages.last,
                               total: controller.total,
-                              values: controller
-                                          .form.value.measureVentilation ==
-                                      null
-                                  ? []
-                                  : [controller.form.value.measureVentilation!],
+                              values: controller.form.value.measureVentilation == null ? [] : [controller.form.value.measureVentilation!],
                               options: const [
                                 'Present',
                                 'Absent',
                               ],
-                              onChanged: (String value) => controller.form
-                                  .update(
-                                      (val) => val?.measureVentilation = value),
+                              onChanged: (String value) => controller.form.update((val) => val?.measureVentilation = value),
                             ),
                             InputWidget(
-                              question:
-                                  'Please provide any additional information on the event',
+                              question: 'Please provide any additional information on the event',
                               hintText: 'Type...',
                               position: controller.pages.last,
                               total: controller.total,
-                              value:
-                                  controller.form.value.additionalInformation,
-                              onChanged: (value) => controller
-                                  .form.value.additionalInformation = value,
+                              value: controller.form.value.additionalInformation,
+                              onChanged: (value) => controller.form.value.additionalInformation = value,
                             ),
                             SelectWidget(
-                              question:
-                                  'How would you categorize the risk of the event?\n(Consider diagnosis, setting and measures)',
+                              question: 'How would you categorize the risk of the event?\n(Consider diagnosis, setting and measures)',
                               position: controller.pages.last,
                               total: controller.total,
-                              values: controller
-                                          .form.value.riskClassification ==
-                                      null
-                                  ? []
-                                  : [controller.form.value.riskClassification!],
+                              values: controller.form.value.riskClassification == null ? [] : [controller.form.value.riskClassification!],
                               options: const [
                                 'Very High Risk',
                                 'High Risk',
                                 'Moderate Risk',
                                 'Low Risk',
                               ],
-                              onChanged: (String value) => controller.form
-                                  .update(
-                                      (val) => val?.riskClassification = value),
+                              onChanged: (String value) => controller.form.update((val) => val?.riskClassification = value),
                             ),
                             SelectWidget(
                               question:
-                                  'What are the recommended response activities?\n(Select all that apply)',
+                                  'Where does the assessed event fall in the below categorization matrix?\na. Is the assessed event human, animal or environmental related?',
                               position: controller.pages.last,
                               total: controller.total,
-                              values:
-                                  controller.form.value.responseActivities ??
-                                      [],
+                              values: controller.form.value.eventCategories == null ? [] : controller.form.value.eventCategories!,
+                              options: const [
+                                'Human',
+                                'Animal',
+                                'Environmental',
+                              ],
+                              onChanged: (String value) => controller.form.update((val) {
+                                val?.eventCategories ??= [];
+
+                                if (val!.eventCategories!.contains(value)) {
+                                  val.eventCategories?.remove(value);
+                                } else {
+                                  val.eventCategories?.add(value);
+                                }
+                              }),
+                            ),
+                            SelectWidget(
+                              question:
+                                  'Where does the assessed event fall in the below categorization matrix?\nb. Is the event considered an infectious or non-infectious?',
+                              position: controller.pages.last,
+                              total: controller.total,
+                              values: controller.form.value.isEventInfectious == null ? [] : [controller.form.value.isEventInfectious!],
+                              options: const [
+                                'Yes',
+                                'No',
+                                'Don\'t Know',
+                                'Not Applicable',
+                              ],
+                              onChanged: (String value) => controller.form.update((val) => val?.isEventInfectious = value),
+                            ),
+                            SelectWidget(
+                              question:
+                                  'Where does the assessed event fall in the below categorization matrix?\nc. If the event is infectious, which of the below systems are affected in your view?',
+                              position: controller.pages.last,
+                              total: controller.total,
+                              values: controller.form.value.systemsAffectedByEvent == null ? [] : controller.form.value.systemsAffectedByEvent!,
+                              options: const [
+                                'Respiratory system',
+                                'Nervous system',
+                                'Endocrine system',
+                                'Reproductive system',
+                                'Digestion system',
+                                'Integumentary system',
+                                'Urinary system',
+                                'Skeletal system',
+                                'Lymphatic system',
+                                'Muscular system',
+                                'Circulatory system',
+                                'Excretory system',
+                                'Immune system',
+                                'Human musculoskeletal system',
+                                'Skeletal muscle system',
+                                'Don\'t Know',
+                                'Not Applicable',
+                              ],
+                              onChanged: (String value) => controller.form.update((val) {
+                                val?.systemsAffectedByEvent ??= [];
+
+                                if (val!.systemsAffectedByEvent!.contains(value)) {
+                                  val.systemsAffectedByEvent?.remove(value);
+                                } else {
+                                  val.systemsAffectedByEvent?.add(value);
+                                }
+                              }),
+                            ),
+                            SelectWidget(
+                              question: 'What are the recommended response activities?\n(Select all that apply)',
+                              position: controller.pages.last,
+                              total: controller.total,
+                              values: controller.form.value.responseActivities ?? [],
                               options: const [
                                 'Escalate response to county level',
                                 'Deploy Sub County RRT',
@@ -349,8 +319,7 @@ class LebsInvestigationFormWidget extends StatelessWidget {
                                 'Enhanced surveillance',
                                 'Monitor',
                               ],
-                              onChanged: (String value) =>
-                                  controller.form.update((val) {
+                              onChanged: (String value) => controller.form.update((val) {
                                 val?.responseActivities ??= [];
 
                                 if (val!.responseActivities!.contains(value)) {
@@ -389,8 +358,7 @@ class LebsInvestigationFormWidget extends StatelessWidget {
                                 child: const Text(
                                   'Previous',
                                 ),
-                                onPressed: () async =>
-                                    await controller.previous(),
+                                onPressed: () async => await controller.previous(),
                               ),
                             ),
                       controller.pages.last == 0
@@ -405,10 +373,7 @@ class LebsInvestigationFormWidget extends StatelessWidget {
                                   backgroundColor: Colors.white,
                                   strokeWidth: 2,
                                 )
-                              : Text(
-                                  controller.pages.last < controller.total - 1
-                                      ? 'Next'
-                                      : 'Submit'),
+                              : Text(controller.pages.last < controller.total - 1 ? 'Next' : 'Submit'),
                           onPressed: () {
                             controller.next();
                           },

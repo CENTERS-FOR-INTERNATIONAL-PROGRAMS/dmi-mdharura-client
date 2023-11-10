@@ -18,7 +18,7 @@ import 'package:m_dharura/ui/pending/pending_controller.dart';
 class InvestigationFormController extends GetxController {
   var isFetching = false.obs;
   var isAdding = false.obs;
-  final int total = 24;
+  final int total = 27;
   var pages = [0].obs;
 
   Rx<InvestigationForm> form = Rx(InvestigationForm());
@@ -66,6 +66,7 @@ class InvestigationFormController extends GetxController {
         type,
         'investigation',
         form.toJson(),
+        version: 'v2',
       ))
           .data!
           .task;
@@ -78,10 +79,9 @@ class InvestigationFormController extends GetxController {
         await Get.dialog(
           DialogWidget(
             title: 'Submit form using SMS?',
-            content:
-                'You are about to submit this form using SMS. Please confirm',
-            onConfirm: () async => await Util.sms(kSmsShortCode,
-                '$kSmsPrefix${signalPrefix(type)}i ${signal.value!.trim()} ${jsonEncode(form.value.toJson().trim())}'),
+            content: 'You are about to submit this form using SMS. Please confirm',
+            onConfirm: () async =>
+                await Util.sms(kSmsShortCode, '$kSmsPrefix${signalPrefix(type)}i ${signal.value!.trim()} ${jsonEncode(form.value.toJson().trim())}'),
           ),
         );
       }
@@ -189,8 +189,7 @@ class InvestigationFormController extends GetxController {
             page += 1;
             break;
           case 19:
-            if (f.additionalInformation == null ||
-                f.additionalInformation!.isEmpty) throw 'Please type';
+            if (f.additionalInformation == null || f.additionalInformation!.isEmpty) throw 'Please type';
             page += 1;
             break;
           case 20:
@@ -198,12 +197,30 @@ class InvestigationFormController extends GetxController {
             page += 1;
             break;
           case 21:
+            if (f.eventCategories == null || f.eventCategories!.isEmpty) throw 'Please select';
+            page += 1;
+            break;
+          case 22:
+            if (f.isEventInfectious == null) throw 'Please select';
+            if (f.isEventInfectious!.toLowerCase() == 'yes') {
+              page += 1;
+              break;
+            }
+            page += 2;
+            break;
+          case 23:
+            if (f.systemsAffectedByEvent == null || f.systemsAffectedByEvent!.isEmpty) {
+              throw 'Please select';
+            }
+            page += 1;
+            break;
+          case 24:
             if (f.responseActivities == null || f.responseActivities!.isEmpty) {
               throw 'Please select';
             }
             page += 1;
             break;
-          case 22:
+          case 25:
             if (f.dateSCMOHInformed == null) throw 'Please select';
             page += 1;
             break;
@@ -232,8 +249,7 @@ class InvestigationFormController extends GetxController {
     await Get.dialog(
       DialogWidget(
         title: 'Save this form?',
-        content:
-            'You are about to save this form. You will be able to edit and submit it later. Please confirm',
+        content: 'You are about to save this form. You will be able to edit and submit it later. Please confirm',
         onConfirm: () async {
           try {
             var box = await Db.pending();
