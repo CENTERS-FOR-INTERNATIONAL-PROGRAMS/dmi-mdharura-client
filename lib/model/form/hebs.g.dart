@@ -28,7 +28,10 @@ Hebs _$HebsFromJson(Map<String, dynamic> json) => Hebs()
       : EscalationForm.fromJson(json['escalationForm'] as Map<String, dynamic>)
   ..summaryForm = json['summaryForm'] == null
       ? null
-      : SummaryForm.fromJson(json['summaryForm'] as Map<String, dynamic>);
+      : SummaryForm.fromJson(json['summaryForm'] as Map<String, dynamic>)
+  ..labForm = json['labForm'] == null
+      ? null
+      : LabForm.fromJson(json['labForm'] as Map<String, dynamic>);
 
 Map<String, dynamic> _$HebsToJson(Hebs instance) {
   final val = <String, dynamic>{};
@@ -47,5 +50,6 @@ Map<String, dynamic> _$HebsToJson(Hebs instance) {
   writeNotNull('responseForm', instance.responseForm);
   writeNotNull('escalationForm', instance.escalationForm);
   writeNotNull('summaryForm', instance.summaryForm);
+  writeNotNull('labForm', instance.labForm);
   return val;
 }

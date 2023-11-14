@@ -28,7 +28,10 @@ Cebs _$CebsFromJson(Map<String, dynamic> json) => Cebs()
       : EscalationForm.fromJson(json['escalationForm'] as Map<String, dynamic>)
   ..summaryForm = json['summaryForm'] == null
       ? null
-      : SummaryForm.fromJson(json['summaryForm'] as Map<String, dynamic>);
+      : SummaryForm.fromJson(json['summaryForm'] as Map<String, dynamic>)
+  ..labForm = json['labForm'] == null
+      ? null
+      : LabForm.fromJson(json['labForm'] as Map<String, dynamic>);
 
 Map<String, dynamic> _$CebsToJson(Cebs instance) {
   final val = <String, dynamic>{};
@@ -47,5 +50,6 @@ Map<String, dynamic> _$CebsToJson(Cebs instance) {
   writeNotNull('responseForm', instance.responseForm);
   writeNotNull('escalationForm', instance.escalationForm);
   writeNotNull('summaryForm', instance.summaryForm);
+  writeNotNull('labForm', instance.labForm);
   return val;
 }
