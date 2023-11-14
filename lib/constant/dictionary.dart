@@ -74,5 +74,9 @@ Map<String, int> kFieldDictionary = {
   "quarantineTypes": 73,
   "isHumansIsolated": 74,
   "isolationTypes": 75,
-  "eventStatuses": 76
+  "eventStatuses": 76,
+  "escalatedTo": 77,
+  "eventCategories": 78,
+  "isEventInfectious": 79,
+  "systemsAffectedByEvent": 80,
 };
