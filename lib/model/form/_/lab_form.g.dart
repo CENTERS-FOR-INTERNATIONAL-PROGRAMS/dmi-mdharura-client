@@ -15,9 +15,9 @@ LabForm _$LabFormFromJson(Map<String, dynamic> json) => LabForm()
   ..user = json['user'] == null
       ? null
       : User.fromJson(json['user'] as Map<String, dynamic>)
-  ..dateOfSampleCollected = json['dateOfSampleCollected'] == null
+  ..dateSampleCollected = json['dateSampleCollected'] == null
       ? null
-      : DateTime.parse(json['dateOfSampleCollected'] as String)
+      : DateTime.parse(json['dateSampleCollected'] as String)
   ..labResults = json['labResults'] as String?
   ..dateLabResultsReceived = json['dateLabResultsReceived'] == null
       ? null
@@ -36,8 +36,8 @@ Map<String, dynamic> _$LabFormToJson(LabForm instance) {
   writeNotNull('_status', instance.baseStatus);
   writeNotNull('createdAt', instance.createdAt?.toIso8601String());
   writeNotNull('user', instance.user);
-  writeNotNull('dateOfSampleCollected',
-      instance.dateOfSampleCollected?.toIso8601String());
+  writeNotNull(
+      'dateSampleCollected', instance.dateSampleCollected?.toIso8601String());
   writeNotNull('labResults', instance.labResults);
   writeNotNull('dateLabResultsReceived',
       instance.dateLabResultsReceived?.toIso8601String());

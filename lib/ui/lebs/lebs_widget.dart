@@ -118,6 +118,22 @@ class LebsWidget extends ResponsiveWidget<LebsController> {
               ),
             ),
             const SizedBox(
+              height: 8,
+            ),
+            ListTile(
+              title: Text(
+                'LEBS Lab',
+                style: Theme.of(screen.context).textTheme.bodyLarge?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
+              subtitle: const Text('Fill LEBS lab form'),
+              trailing: ElevatedButton(
+                onPressed: () async => await Get.toNamed('${Routes.kForm}${FormType.kLEBS}/${FormType.kLab}'),
+                child: const Text('Start'),
+              ),
+            ),
+            const SizedBox(
               height: 24,
             ),
           ],

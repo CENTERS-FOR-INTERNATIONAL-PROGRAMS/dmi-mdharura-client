@@ -8,11 +8,13 @@ import 'package:m_dharura/ui/_/responsive_widget.dart';
 import 'package:m_dharura/ui/task/task_controller.dart';
 import 'package:m_dharura/ui/task/view/_/escalation/escalation_view_widget.dart';
 import 'package:m_dharura/ui/task/view/_/investigation/investigation_view_widget.dart';
+import 'package:m_dharura/ui/task/view/_/lab/lab_view_widget.dart';
 import 'package:m_dharura/ui/task/view/_/response/response_view_widget.dart';
 import 'package:m_dharura/ui/task/view/_/summary/summary_view_widget.dart';
 import 'package:m_dharura/ui/task/view/_/verification/verification_view_widget.dart';
 import 'package:m_dharura/ui/task/view/lebs/escalation/lebs_escalation_view_widget.dart';
 import 'package:m_dharura/ui/task/view/lebs/investigation/lebs_investigation_view_widget.dart';
+import 'package:m_dharura/ui/task/view/lebs/lab/lebs_lab_view_widget.dart';
 import 'package:m_dharura/ui/task/view/lebs/response/lebs_response_view_widget.dart';
 import 'package:m_dharura/ui/task/view/lebs/summary/lebs_summary_view_widget.dart';
 import 'package:m_dharura/ui/task/view/lebs/verification/lebs_verification_view_widget.dart';
@@ -211,6 +213,15 @@ class TaskWidget extends ResponsiveWidget<TaskController> {
                                 await Get.to(SummaryViewWidget(form: controller.task.value!.cebs!.summaryForm!, type: 'CEBS'));
                               },
                             ),
+                          if (controller.task.value!.cebs!.labForm != null)
+                            TaskFormItemWidget(
+                              title: 'CEBS Lab',
+                              date: controller.task.value!.cebs!.labForm!.createdAt,
+                              user: controller.task.value!.cebs!.labForm!.user,
+                              onClick: () async {
+                                await Get.to(LabViewWidget(form: controller.task.value!.cebs!.labForm!, type: 'CEBS'));
+                              },
+                            ),
                         ],
                         if (controller.task.value!.hebs != null) ...[
                           if (controller.task.value!.hebs!.verificationForm != null)
@@ -256,6 +267,15 @@ class TaskWidget extends ResponsiveWidget<TaskController> {
                               user: controller.task.value!.hebs!.summaryForm!.user,
                               onClick: () async {
                                 await Get.to(SummaryViewWidget(form: controller.task.value!.hebs!.summaryForm!, type: 'HEBS'));
+                              },
+                            ),
+                          if (controller.task.value!.hebs!.labForm != null)
+                            TaskFormItemWidget(
+                              title: 'HEBS Lab',
+                              date: controller.task.value!.hebs!.labForm!.createdAt,
+                              user: controller.task.value!.hebs!.labForm!.user,
+                              onClick: () async {
+                                await Get.to(LabViewWidget(form: controller.task.value!.hebs!.labForm!, type: 'HEBS'));
                               },
                             ),
                         ],
@@ -317,6 +337,15 @@ class TaskWidget extends ResponsiveWidget<TaskController> {
                                 await Get.to(SummaryViewWidget(form: controller.task.value!.vebs!.summaryForm!, type: 'VEBS'));
                               },
                             ),
+                          if (controller.task.value!.vebs!.labForm != null)
+                            TaskFormItemWidget(
+                              title: 'VEBS Lab',
+                              date: controller.task.value!.vebs!.labForm!.createdAt,
+                              user: controller.task.value!.vebs!.labForm!.user,
+                              onClick: () async {
+                                await Get.to(LabViewWidget(form: controller.task.value!.vebs!.labForm!, type: 'VEBS'));
+                              },
+                            ),
                         ],
                         if (controller.task.value!.lebs != null) ...[
                           if (controller.task.value!.lebs!.verificationForm != null)
@@ -370,6 +399,15 @@ class TaskWidget extends ResponsiveWidget<TaskController> {
                               user: controller.task.value!.lebs!.summaryForm!.user,
                               onClick: () async {
                                 await Get.to(LebsSummaryViewWidget(form: controller.task.value!.lebs!.summaryForm!));
+                              },
+                            ),
+                          if (controller.task.value!.lebs!.labForm != null)
+                            TaskFormItemWidget(
+                              title: 'LEBS Lab',
+                              date: controller.task.value!.lebs!.labForm!.createdAt,
+                              user: controller.task.value!.lebs!.labForm!.user,
+                              onClick: () async {
+                                await Get.to(LebsLabViewWidget(form: controller.task.value!.lebs!.labForm!));
                               },
                             ),
                         ],

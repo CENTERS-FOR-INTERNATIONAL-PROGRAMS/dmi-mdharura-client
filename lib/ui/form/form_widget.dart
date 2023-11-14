@@ -5,6 +5,7 @@ import 'package:m_dharura/ui/_/message_widget.dart';
 import 'package:m_dharura/ui/_/responsive_widget.dart';
 import 'package:m_dharura/ui/form/_/escalation/escalation_form_widget.dart';
 import 'package:m_dharura/ui/form/_/investigation/investigation_form_widget.dart';
+import 'package:m_dharura/ui/form/_/lab/lab_form_widget.dart';
 import 'package:m_dharura/ui/form/_/response/response_form_widget.dart';
 import 'package:m_dharura/ui/form/_/signal/signal_form_widget.dart';
 import 'package:m_dharura/ui/form/_/summary/summary_form_widget.dart';
@@ -12,6 +13,7 @@ import 'package:m_dharura/ui/form/_/verification/verification_form_widget.dart';
 import 'package:m_dharura/ui/form/form_controller.dart';
 import 'package:m_dharura/ui/form/lebs/escalation/lebs_escalation_form_widget.dart';
 import 'package:m_dharura/ui/form/lebs/investigation/lebs_investigation_form_widget.dart';
+import 'package:m_dharura/ui/form/lebs/lab/lebs_lab_form_widget.dart';
 import 'package:m_dharura/ui/form/lebs/response/lebs_response_form_widget.dart';
 import 'package:m_dharura/ui/form/lebs/summary/lebs_summary_form_widget.dart';
 import 'package:m_dharura/ui/form/lebs/verification/lebs_verification_form_widget.dart';
@@ -68,6 +70,8 @@ class FormWidget extends ResponsiveWidget<FormController> {
             return EscalationFormWidget(type: type, signalId: signalId);
           case FormType.kSummary:
             return SummaryFormWidget(type: type, signalId: signalId);
+          case FormType.kLab:
+            return LabFormWidget(type: type, signalId: signalId);
         }
         break;
       case FormType.kLEBS:
@@ -84,6 +88,8 @@ class FormWidget extends ResponsiveWidget<FormController> {
             return LebsEscalationFormWidget(signalId: signalId);
           case FormType.kSummary:
             return LebsSummaryFormWidget(signalId: signalId);
+          case FormType.kLab:
+            return LebsLabFormWidget(signalId: signalId);
         }
         break;
     }

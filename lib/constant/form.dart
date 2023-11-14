@@ -10,5 +10,6 @@ class FormType {
   static const kResponse = 'response';
   static const kEscalation = 'escalation';
   static const kSummary = 'summary';
+  static const kLab = 'lab';
   static const kRequest = 'request';
 }

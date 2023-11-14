@@ -43,11 +43,25 @@ class TaskItemWidget extends StatelessWidget {
         TaskFormItem(
           title: 'LEBS Summary',
           date: task.lebs != null && task.lebs?.summaryForm != null ? task.lebs?.summaryForm?.createdAt : null,
-          user: task.lebs != null && task.lebs?.summaryForm != null ? task.lebs?.summaryForm?.user : null,
+          user: task.lebs != null && task.lebs?.investigationForm != null ? task.lebs?.summaryForm?.user : null,
           onClick: !isActionable || task.lebs == null || (task.lebs != null && (task.lebs?.summaryForm != null || task.lebs?.investigationForm == null))
               ? null
               : () async {
                   await Get.toNamed('${Routes.kForm}${FormType.kLEBS}/${FormType.kSummary}', arguments: {'signalId': task.signalId});
+
+                  refresh!();
+                },
+        ),
+        TaskFormItem(
+          title: 'LEBS Lab',
+          date: task.lebs != null && task.lebs?.labForm != null ? task.lebs?.labForm?.createdAt : null,
+          user: task.lebs != null && task.lebs?.investigationForm != null && task.lebs?.investigationForm?.isSamplesCollected != "N/A"
+              ? task.lebs?.labForm?.user
+              : null,
+          onClick: !isActionable || task.lebs == null || (task.lebs != null && (task.lebs?.labForm != null || task.lebs?.investigationForm == null))
+              ? null
+              : () async {
+                  await Get.toNamed('${Routes.kForm}${FormType.kLEBS}/${FormType.kLab}', arguments: {'signalId': task.signalId});
 
                   refresh!();
                 },
@@ -92,10 +106,24 @@ class TaskItemWidget extends StatelessWidget {
     } else if (task.signal.startsWith('h')) {
       return [
         TaskFormItem(
+          title: 'HEBS Lab',
+          date: task.hebs != null && task.hebs?.labForm != null ? task.hebs?.labForm?.createdAt : null,
+          user: task.hebs != null && task.hebs?.investigationForm != null && task.hebs?.investigationForm?.isLabSamplesCollected != "N/A"
+              ? task.hebs?.labForm?.user
+              : null,
+          onClick: !isActionable || task.hebs == null || (task.hebs != null && (task.hebs?.labForm != null || task.hebs?.investigationForm == null))
+              ? null
+              : () async {
+                  await Get.toNamed('${Routes.kForm}${FormType.kHEBS}/${FormType.kLab}', arguments: {'signalId': task.signalId});
+
+                  refresh!();
+                },
+        ),
+        TaskFormItem(
           title: 'HEBS Summary',
           date: task.hebs != null && task.hebs?.summaryForm != null ? task.hebs?.summaryForm?.createdAt : null,
-          user: task.hebs != null && task.hebs?.summaryForm != null ? task.hebs?.summaryForm?.user : null,
-          onClick: !isActionable || task.hebs == null || (task.hebs != null && (task.hebs?.summaryForm != null || task.hebs?.responseForm == null))
+          user: task.hebs != null && task.hebs?.investigationForm != null ? task.hebs?.summaryForm?.user : null,
+          onClick: !isActionable || task.hebs == null || (task.hebs != null && (task.hebs?.summaryForm != null || task.hebs?.investigationForm == null))
               ? null
               : () async {
                   await Get.toNamed('${Routes.kForm}${FormType.kHEBS}/${FormType.kSummary}', arguments: {'signalId': task.signalId});
@@ -157,11 +185,25 @@ class TaskItemWidget extends StatelessWidget {
         TaskFormItem(
           title: 'VEBS Summary',
           date: task.vebs != null && task.vebs?.summaryForm != null ? task.vebs?.summaryForm?.createdAt : null,
-          user: task.vebs != null && task.vebs?.summaryForm != null ? task.vebs?.summaryForm?.user : null,
-          onClick: !isActionable || task.vebs == null || (task.vebs != null && (task.vebs?.summaryForm != null || task.vebs?.responseForm == null))
+          user: task.vebs != null && task.vebs?.investigationForm != null ? task.vebs?.summaryForm?.user : null,
+          onClick: !isActionable || task.vebs == null || (task.vebs != null && (task.vebs?.summaryForm != null || task.vebs?.investigationForm == null))
               ? null
               : () async {
                   await Get.toNamed('${Routes.kForm}${FormType.kVEBS}/${FormType.kSummary}', arguments: {'signalId': task.signalId});
+
+                  refresh!();
+                },
+        ),
+        TaskFormItem(
+          title: 'VEBS Lab',
+          date: task.vebs != null && task.vebs?.labForm != null ? task.vebs?.labForm?.createdAt : null,
+          user: task.vebs != null && task.vebs?.investigationForm != null && task.vebs?.investigationForm?.isLabSamplesCollected != "N/A"
+              ? task.vebs?.labForm?.user
+              : null,
+          onClick: !isActionable || task.vebs == null || (task.vebs != null && (task.vebs?.labForm != null || task.vebs?.investigationForm == null))
+              ? null
+              : () async {
+                  await Get.toNamed('${Routes.kForm}${FormType.kVEBS}/${FormType.kLab}', arguments: {'signalId': task.signalId});
 
                   refresh!();
                 },
@@ -220,11 +262,25 @@ class TaskItemWidget extends StatelessWidget {
         TaskFormItem(
           title: 'CEBS Summary',
           date: task.cebs != null && task.cebs?.summaryForm != null ? task.cebs?.summaryForm?.createdAt : null,
-          user: task.cebs != null && task.cebs?.summaryForm != null ? task.cebs?.summaryForm?.user : null,
-          onClick: !isActionable || task.cebs == null || (task.cebs != null && (task.cebs?.summaryForm != null || task.cebs?.responseForm == null))
+          user: task.cebs != null && task.cebs?.investigationForm != null ? task.cebs?.summaryForm?.user : null,
+          onClick: !isActionable || task.cebs == null || (task.cebs != null && (task.cebs?.summaryForm != null || task.cebs?.investigationForm == null))
               ? null
               : () async {
                   await Get.toNamed('${Routes.kForm}${FormType.kCEBS}/${FormType.kSummary}', arguments: {'signalId': task.signalId});
+
+                  refresh!();
+                },
+        ),
+        TaskFormItem(
+          title: 'CEBS Lab',
+          date: task.cebs != null && task.cebs?.labForm != null ? task.cebs?.labForm?.createdAt : null,
+          user: task.cebs != null && task.cebs?.investigationForm != null && task.cebs?.investigationForm?.isLabSamplesCollected != "N/A"
+              ? task.cebs?.labForm?.user
+              : null,
+          onClick: !isActionable || task.cebs == null || (task.cebs != null && (task.cebs?.labForm != null || task.cebs?.investigationForm == null))
+              ? null
+              : () async {
+                  await Get.toNamed('${Routes.kForm}${FormType.kCEBS}/${FormType.kLab}', arguments: {'signalId': task.signalId});
 
                   refresh!();
                 },
@@ -281,23 +337,25 @@ class TaskItemWidget extends StatelessWidget {
     }
   }
 
-  Widget _lastTile() {
+  List<Widget> _lastTile() {
     var items = _items().reversed;
 
-    if (items.isEmpty) return Container();
+    if (items.isEmpty) return [Container()];
 
     try {
       if (task.status == 'pending') {
-        var item = items.firstWhere((element) => element.user == null);
-
-        return TaskFormItemWidget(title: item.title, date: item.date, user: item.user, onClick: item.onClick, actionText: 'Submit');
+        return items
+            .where((element) => element.user == null && element.onClick != null)
+            .map((item) => TaskFormItemWidget(title: item.title, date: item.date, user: item.user, onClick: item.onClick, actionText: 'Submit'))
+            .toList();
       } else {
-        var item = items.lastWhere((element) => element.user != null);
-
-        return TaskFormItemWidget(title: item.title, date: item.date, user: item.user, onClick: item.onClick, actionText: 'Submit');
+        return items
+            .where((element) => element.user != null)
+            .map((item) => TaskFormItemWidget(title: item.title, date: item.date, user: item.user, onClick: item.onClick, actionText: 'Submit'))
+            .toList();
       }
     } catch (e) {
-      return Container();
+      return [Container()];
     }
   }
 
@@ -369,7 +427,7 @@ class TaskItemWidget extends StatelessWidget {
               unit: task.unit,
               isPrimary: false,
             ),
-            _lastTile(),
+            ..._lastTile(),
             const SizedBox(
               height: 8,
             ),

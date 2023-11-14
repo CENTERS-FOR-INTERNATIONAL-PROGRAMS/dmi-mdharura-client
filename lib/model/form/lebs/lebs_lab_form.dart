@@ -7,7 +7,7 @@ part 'lebs_lab_form.g.dart';
 @JsonSerializable()
 class LebsLabForm extends BaseObject {
   User? user;
-  DateTime? dateOfSampleCollected;
+  DateTime? dateSampleCollected;
   String? labResults;
   DateTime? dateLabResultsReceived;
 

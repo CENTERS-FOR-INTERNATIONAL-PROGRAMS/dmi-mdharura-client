@@ -116,6 +116,22 @@ class HebsWidget extends ResponsiveWidget<HebsController> {
               ),
             ),
             const SizedBox(
+              height: 8,
+            ),
+            ListTile(
+              title: Text(
+                'HEBS Lab',
+                style: Theme.of(screen.context).textTheme.bodyLarge?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
+              subtitle: const Text('Fill HEBS lab form'),
+              trailing: ElevatedButton(
+                onPressed: () async => await Get.toNamed('${Routes.kForm}${FormType.kHEBS}/${FormType.kLab}'),
+                child: const Text('Start'),
+              ),
+            ),
+            const SizedBox(
               height: 24,
             ),
           ],
