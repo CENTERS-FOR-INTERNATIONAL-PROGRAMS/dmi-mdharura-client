@@ -104,21 +104,13 @@ class LebsLabFormController extends GetxController {
             page += 1;
             break;
 
-          // case 12:
-          //   if (f.isLabSamplesCollected == null) throw 'Please select';
-          //   if (f.isLabSamplesCollected!.toLowerCase() == 'yes') {
-          //     page += 1;
-          //     break;
-          //   }
-          //   page += 4;
-          //   break;
           case 1:
             if (f.dateSampleCollected == null) throw 'Please select';
             page += 1;
             break;
           case 2:
             if (f.labResults == null || f.labResults!.isEmpty) {
-              throw 'Please type';
+              throw 'Please select';
             }
             page += 1;
             break;

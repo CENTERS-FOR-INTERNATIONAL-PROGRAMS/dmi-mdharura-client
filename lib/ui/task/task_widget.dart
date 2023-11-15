@@ -219,7 +219,11 @@ class TaskWidget extends ResponsiveWidget<TaskController> {
                               date: controller.task.value!.cebs!.labForm!.createdAt,
                               user: controller.task.value!.cebs!.labForm!.user,
                               onClick: () async {
-                                await Get.to(LabViewWidget(form: controller.task.value!.cebs!.labForm!, type: 'CEBS'));
+                                await Get.to(LabViewWidget(
+                                  form: controller.task.value!.cebs!.labForm!,
+                                  type: 'CEBS',
+                                  signalId: controller.task.value!.signalId,
+                                ));
                               },
                             ),
                         ],
@@ -275,7 +279,11 @@ class TaskWidget extends ResponsiveWidget<TaskController> {
                               date: controller.task.value!.hebs!.labForm!.createdAt,
                               user: controller.task.value!.hebs!.labForm!.user,
                               onClick: () async {
-                                await Get.to(LabViewWidget(form: controller.task.value!.hebs!.labForm!, type: 'HEBS'));
+                                await Get.to(LabViewWidget(
+                                  form: controller.task.value!.hebs!.labForm!,
+                                  type: 'HEBS',
+                                  signalId: controller.task.value!.signalId,
+                                ));
                               },
                             ),
                         ],
@@ -343,7 +351,11 @@ class TaskWidget extends ResponsiveWidget<TaskController> {
                               date: controller.task.value!.vebs!.labForm!.createdAt,
                               user: controller.task.value!.vebs!.labForm!.user,
                               onClick: () async {
-                                await Get.to(LabViewWidget(form: controller.task.value!.vebs!.labForm!, type: 'VEBS'));
+                                await Get.to(LabViewWidget(
+                                  form: controller.task.value!.vebs!.labForm!,
+                                  type: 'VEBS',
+                                  signalId: controller.task.value!.signalId,
+                                ));
                               },
                             ),
                         ],
@@ -407,7 +419,10 @@ class TaskWidget extends ResponsiveWidget<TaskController> {
                               date: controller.task.value!.lebs!.labForm!.createdAt,
                               user: controller.task.value!.lebs!.labForm!.user,
                               onClick: () async {
-                                await Get.to(LebsLabViewWidget(form: controller.task.value!.lebs!.labForm!));
+                                await Get.to(LebsLabViewWidget(
+                                  form: controller.task.value!.lebs!.labForm!,
+                                  signalId: controller.task.value!.signalId,
+                                ));
                               },
                             ),
                         ],

@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:m_dharura/model/form/lebs/lebs_lab_form.dart';
 import 'package:m_dharura/ui/_/date_widget.dart';
 import 'package:m_dharura/ui/_/input_widget.dart';
 import 'package:m_dharura/ui/_/responsive_widget.dart';
+import 'package:m_dharura/ui/task/view/lebs/lab/edit/lebs_lab_edit_widget.dart';
 
 class LebsLabViewWidget extends ResponsiveWidget {
   final LebsLabForm form;
+  final String? signalId;
 
-  LebsLabViewWidget({Key? key, required this.form}) : super(key: key);
+  LebsLabViewWidget({
+    Key? key,
+    required this.form,
+    this.signalId,
+  }) : super(key: key);
 
   @override
   bool get shouldAdjust => true;
@@ -15,7 +22,25 @@ class LebsLabViewWidget extends ResponsiveWidget {
   @override
   Widget? tablet() => Scaffold(
         appBar: AppBar(
-          title: const Text('Lebs Lab Results Form'),
+          title: const Text('LEBS Lab Results Form'),
+          actions: [
+            TextButton(
+              child: const Text(
+                'Edit',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+              onPressed: () async => await Get.to(LebsLabEditWidget(
+                form: form,
+                type: 'LEBS',
+                signalId: signalId,
+              )),
+            ),
+            const SizedBox(
+              width: 16,
+            ),
+          ],
         ),
         body: Container(
           margin: const EdgeInsets.symmetric(
@@ -23,10 +48,6 @@ class LebsLabViewWidget extends ResponsiveWidget {
           ),
           child: ListView(
             children: [
-              // SelectWidget(
-              //   question: 'Have the laboratory samples been taken?',
-              //   options: form.isLabSamplesCollected == null ? [] : [form.isLabSamplesCollected!],
-              // ),
               DateWidget(
                 question: 'Date of sample collection',
                 value: form.dateSampleCollected,

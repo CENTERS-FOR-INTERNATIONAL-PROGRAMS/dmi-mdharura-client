@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:m_dharura/ui/_/date_widget.dart';
 import 'package:m_dharura/ui/_/input_widget.dart';
+import 'package:m_dharura/ui/_/select_widget.dart';
 import 'package:m_dharura/ui/form/lebs/lab/lebs_lab_form_controller.dart';
 
 class LebsLabFormWidget extends StatelessWidget {
@@ -61,18 +62,6 @@ class LebsLabFormWidget extends StatelessWidget {
                               lines: 1,
                               textCapitalization: TextCapitalization.characters,
                             ),
-                            // SelectWidget(
-                            //   question: 'Have the laboratory samples been taken?',
-                            //   position: controller.pages.last,
-                            //   total: controller.total,
-                            //   values: controller.form.value.isLabSamplesCollected == null ? [] : [controller.form.value.isLabSamplesCollected!],
-                            //   options: const [
-                            //     'Yes',
-                            //     'No',
-                            //     'N/A',
-                            //   ],
-                            //   onChanged: (String value) => controller.form.update((val) => val?.isLabSamplesCollected = value),
-                            // ),
                             DateWidget(
                               onChanged: (value) => controller.form.update((val) => val?.dateSampleCollected = value),
                               position: controller.pages.last,
@@ -81,13 +70,17 @@ class LebsLabFormWidget extends StatelessWidget {
                               total: controller.total,
                               hintText: 'Select date',
                             ),
-                            InputWidget(
+                            SelectWidget(
                               question: 'What are the laboratory results?',
-                              hintText: 'Type...',
                               position: controller.pages.last,
                               total: controller.total,
-                              value: controller.form.value.labResults,
-                              onChanged: (value) => controller.form.update((val) => val?.labResults = value),
+                              values: controller.form.value.labResults == null ? [] : [controller.form.value.labResults!],
+                              options: const [
+                                'Positive',
+                                'Negative',
+                                'N/A',
+                              ],
+                              onChanged: (String value) => controller.form.update((val) => val?.labResults = value),
                             ),
                             DateWidget(
                               question: 'Date when the results were received',

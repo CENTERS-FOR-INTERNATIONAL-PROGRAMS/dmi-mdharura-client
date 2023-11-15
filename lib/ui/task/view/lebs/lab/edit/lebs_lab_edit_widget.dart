@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:m_dharura/model/form/lebs/lebs_lab_form.dart';
 import 'package:m_dharura/ui/_/date_widget.dart';
 import 'package:m_dharura/ui/_/input_widget.dart';
 import 'package:m_dharura/ui/_/select_widget.dart';
-import 'package:m_dharura/ui/form/_/lab/lab_form_controller.dart';
+import 'package:m_dharura/ui/task/view/lebs/lab/edit/lebs_lab_edit_controller.dart';
 
-class LabFormWidget extends StatelessWidget {
+class LebsLabEditWidget extends StatelessWidget {
+  final LebsLabForm form;
   final String? signalId;
+
   final String type;
 
-  const LabFormWidget({Key? key, required this.type, this.signalId}) : super(key: key);
+  const LebsLabEditWidget({Key? key, required this.type, required this.form, this.signalId}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => GetX<LabFormController>(
-        init: LabFormController(type: type, signalId: signalId),
+  Widget build(BuildContext context) => GetX<LebsLabEditController>(
+        init: LebsLabEditController(type: type, signalId: signalId, labForm: form),
         builder: (controller) => WillPopScope(
           onWillPop: () async {
             await controller.previous();

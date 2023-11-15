@@ -15,7 +15,7 @@ import 'package:m_dharura/model/pending.dart';
 import 'package:m_dharura/ui/_/dialog_widget.dart';
 import 'package:m_dharura/ui/pending/pending_controller.dart';
 
-class LabFormController extends GetxController {
+class LabEditController extends GetxController {
   var isFetching = false.obs;
   var isAdding = false.obs;
   final int total = 5;
@@ -23,20 +23,30 @@ class LabFormController extends GetxController {
 
   final _taskApi = Get.put(TaskApi());
 
-  Rx<LabForm> form = Rx(LabForm());
-
   final String? signalId;
+
+  final LabForm labForm;
   final String type;
 
-  LabFormController({required this.type, this.signalId});
+  LabEditController({
+    required this.type,
+    required this.labForm,
+    this.signalId,
+  });
 
   Rx<String?> signal = Rx(null);
+
+  Rx<LabForm> form = Rx(LabForm());
 
   @override
   void onInit() async {
     super.onInit();
 
     signal.value = signalId;
+    form.value = LabForm()
+      ..dateLabResultsReceived = labForm.dateLabResultsReceived
+      ..dateSampleCollected = labForm.dateSampleCollected
+      ..labResults = labForm.labResults;
 
     try {
       var box = await Db.pending();

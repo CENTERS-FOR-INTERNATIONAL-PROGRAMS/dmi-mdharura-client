@@ -10,12 +10,12 @@ import 'package:m_dharura/helper/extension.dart';
 import 'package:m_dharura/helper/session.dart';
 import 'package:m_dharura/helper/signal.dart';
 import 'package:m_dharura/helper/util.dart';
-import 'package:m_dharura/model/form/_/lab_form.dart';
+import 'package:m_dharura/model/form/lebs/lebs_lab_form.dart';
 import 'package:m_dharura/model/pending.dart';
 import 'package:m_dharura/ui/_/dialog_widget.dart';
 import 'package:m_dharura/ui/pending/pending_controller.dart';
 
-class LabFormController extends GetxController {
+class LebsLabEditController extends GetxController {
   var isFetching = false.obs;
   var isAdding = false.obs;
   final int total = 5;
@@ -23,28 +23,38 @@ class LabFormController extends GetxController {
 
   final _taskApi = Get.put(TaskApi());
 
-  Rx<LabForm> form = Rx(LabForm());
-
   final String? signalId;
+
+  final LebsLabForm labForm;
   final String type;
 
-  LabFormController({required this.type, this.signalId});
+  LebsLabEditController({
+    required this.type,
+    required this.labForm,
+    this.signalId,
+  });
 
   Rx<String?> signal = Rx(null);
+
+  Rx<LebsLabForm> form = Rx(LebsLabForm());
 
   @override
   void onInit() async {
     super.onInit();
 
     signal.value = signalId;
+    form.value = LebsLabForm()
+      ..dateLabResultsReceived = labForm.dateLabResultsReceived
+      ..dateSampleCollected = labForm.dateSampleCollected
+      ..labResults = labForm.labResults;
 
     try {
       var box = await Db.pending();
 
-      var pending = box.get('${signal.value}_lab');
+      var pending = box.get('${signal.value}_lebs_lab');
 
       if (pending != null) {
-        form.value = LabForm.fromJson(pending.form);
+        form.value = LebsLabForm.fromJson(pending.form);
       }
     } catch (e) {
       if (kDebugMode) {
@@ -66,7 +76,7 @@ class LabFormController extends GetxController {
         type,
         'lab',
         form.toJson(),
-        version: 'v2',
+        version: 'v3',
       ))
           .data!
           .task;
@@ -111,7 +121,7 @@ class LabFormController extends GetxController {
             break;
           case 2:
             if (f.labResults == null || f.labResults!.isEmpty) {
-              throw 'Please type';
+              throw 'Please select';
             }
             page += 1;
             break;
@@ -151,7 +161,7 @@ class LabFormController extends GetxController {
             var box = await Db.pending();
 
             await box.put(
-                '${signal.value}_lab',
+                '${signal.value}_lebs_lab',
                 Pending()
                   ..signalId = signal.value!
                   ..type = type
