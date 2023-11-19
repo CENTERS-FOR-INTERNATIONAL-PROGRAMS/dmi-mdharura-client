@@ -24,4 +24,5 @@ class Routes {
   static const kSplash = '/';
   static const kTest = '/test';
   static const kTask = '/task/';
+  static const kDatalist = '/data-list/';
 }
