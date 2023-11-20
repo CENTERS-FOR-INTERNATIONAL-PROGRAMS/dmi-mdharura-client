@@ -1,51 +1,71 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import 'package:m_dharura/api/analytics_api.dart';
+import 'package:m_dharura/api/task_api.dart';
 import 'package:m_dharura/api/unit_api.dart';
+import 'package:m_dharura/constant/env.dart';
 import 'package:m_dharura/helper/util.dart';
-import 'package:m_dharura/model/dashboard.dart';
+import 'package:m_dharura/model/file.dart';
+import 'package:m_dharura/model/task.dart';
+import 'package:m_dharura/model/task_page.dart';
 import 'package:m_dharura/model/unit.dart';
 import 'package:m_dharura/helper/extension.dart';
 
 class TaskDatalistController extends GetxController {
   var isFetching = false.obs;
-
-  final _analyticsApi = Get.put(AnalyticsApi());
-
-  final _unitApi = Get.put(UnitApi());
+  var isDownloading = false.obs;
 
   final String unitId;
 
-  RxList<Dashboard> dashboards = RxList.empty();
+  RxList<Task> tasks = RxList.empty();
+
+  Rx<TaskPage?> taskPage = Rx(null);
+
+  final _taskApi = Get.put(TaskApi());
+
+  final _unitApi = Get.put(UnitApi());
 
   RxString state = RxString('Live');
 
   Rx<Unit?> unit = Rx(null);
+  Rx<File?> file = Rx(null);
 
   TaskDatalistController({required this.unitId});
 
-  Rx<DateTime> dateStart = Rx<DateTime>(DateTime.now().subtract(const Duration(days: 7)).startOfDay());
+  Rx<DateTime> dateStart = Rx<DateTime>(DateTime.now().subtract(const Duration(days: 30)).startOfDay());
   Rx<DateTime> dateEnd = Rx<DateTime>(DateTime.now().subtract(const Duration(days: 1)).endOfDay());
 
   @override
   void onInit() async {
     super.onInit();
 
-    await fetch();
+    await fetch(true);
   }
 
-  fetch() async {
+  fetch(bool refresh) async {
     if (isFetching.isTrue) return;
 
     isFetching.value = true;
 
+    if (refresh) {
+      tasks.clear();
+
+      taskPage.value = null;
+    } else if (taskPage.value != null && taskPage.value!.isEnd) {
+      isFetching.value = false;
+      return;
+    }
+
     try {
-      unit.value = (await _unitApi.retrieve({'unitId': unitId})).data?.unit;
+      unit.value ??= (await _unitApi.retrieve({'unitId': unitId})).data?.unit;
+
+      int page = taskPage.value == null ? 1 : taskPage.value!.next;
 
       Map<String, dynamic> query = {
         'unitId': unitId,
         'dateStart': dateStart.value.startOfDay().toUtc().toIso8601String(),
         'dateEnd': dateEnd.value.endOfDay().toUtc().toIso8601String(),
+        'page': page.toString(),
+        'type': '',
       };
 
       if (kDebugMode) {
@@ -56,13 +76,37 @@ class TaskDatalistController extends GetxController {
         query.addAll({'state': state.value.toLowerCase()});
       }
 
-      dashboards.clear();
+      taskPage.value = (await _taskApi.retrieve(query)).data?.taskPage;
 
-      dashboards.addAll((await _analyticsApi.retrieve(query)).data!.dashboards!);
+      tasks.addAll(taskPage.value!.docs);
     } catch (e) {
       Util.toast(e);
     }
 
     isFetching.value = false;
+  }
+
+  download() async {
+    if (isDownloading.isTrue) return;
+
+    isDownloading.value = true;
+
+    try {
+      file.value = (await _taskApi.downloadTasks({
+        'unitId': unit.value!.id,
+        'dateStart': dateStart.value.startOfDay().toUtc().toIso8601String(),
+        'dateEnd': dateEnd.value.endOfDay().toUtc().toIso8601String(),
+      }))
+          .data
+          ?.file;
+
+      if (file.value != null) {
+        Util.url('${kBaseApiUrl}v1/file/${file.value!.filename}');
+      }
+    } catch (e) {
+      Util.toast(e);
+    }
+
+    isDownloading.value = false;
   }
 }
