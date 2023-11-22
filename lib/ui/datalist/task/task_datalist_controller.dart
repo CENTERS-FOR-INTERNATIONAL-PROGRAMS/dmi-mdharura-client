@@ -38,10 +38,10 @@ class TaskDatalistController extends GetxController {
   void onInit() async {
     super.onInit();
 
-    await fetch(true);
+    await fetch(refresh: true);
   }
 
-  fetch(bool refresh) async {
+  fetch({bool refresh = false, String direction = 'next'}) async {
     if (isFetching.isTrue) return;
 
     isFetching.value = true;
@@ -58,7 +58,11 @@ class TaskDatalistController extends GetxController {
     try {
       unit.value ??= (await _unitApi.retrieve({'unitId': unitId})).data?.unit;
 
-      int page = taskPage.value == null ? 1 : taskPage.value!.next;
+      int page = taskPage.value == null
+          ? 1
+          : direction == 'prev'
+              ? taskPage.value!.prev
+              : taskPage.value!.next;
 
       Map<String, dynamic> query = {
         'unitId': unitId,
@@ -78,7 +82,7 @@ class TaskDatalistController extends GetxController {
 
       taskPage.value = (await _taskApi.retrieve(query)).data?.taskPage;
 
-      tasks.addAll(taskPage.value!.docs);
+      tasks.value = taskPage.value!.docs;
     } catch (e) {
       Util.toast(e);
     }

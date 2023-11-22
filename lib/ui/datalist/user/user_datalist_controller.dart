@@ -33,10 +33,10 @@ class UserDatalistController extends GetxController {
   void onInit() async {
     super.onInit();
 
-    await fetch(true);
+    await fetch(refresh: true);
   }
 
-  fetch(bool refresh) async {
+  fetch({bool refresh = false, String direction = 'next'}) async {
     if (isFetching.isTrue) return;
 
     isFetching.value = true;
@@ -53,7 +53,11 @@ class UserDatalistController extends GetxController {
     try {
       unit.value ??= (await _unitApi.retrieve({'unitId': unitId})).data?.unit;
 
-      int page = rolePage.value == null ? 1 : rolePage.value!.next;
+      int page = rolePage.value == null
+          ? 1
+          : direction == 'prev'
+              ? rolePage.value!.prev
+              : rolePage.value!.next;
 
       Map<String, dynamic> query = {
         'unitId': unitId,
@@ -68,7 +72,7 @@ class UserDatalistController extends GetxController {
 
       rolePage.value = (await _roleApi.retrieve(query)).data?.rolePage;
 
-      roles.addAll(rolePage.value!.docs);
+      roles.value = rolePage.value!.docs;
     } catch (e) {
       Util.toast(e);
     }

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 abstract class Page<T> {
   late List<T> docs;
   late int total;
@@ -9,6 +11,8 @@ abstract class Page<T> {
   int get currentTotal => (page - 1) * limit + docs.length;
 
   int get next => page + 1;
+
+  int get prev => max(page - 1, 1);
 
   bool get isEnd => page >= pages || docs.isEmpty;
 }
