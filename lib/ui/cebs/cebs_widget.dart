@@ -33,15 +33,11 @@ class CebsWidget extends ResponsiveWidget<CebsController> {
             ListTile(
               title: Text(
                 'CEBS Signal',
-                style: Theme.of(screen.context)
-                    .textTheme
-                    .bodyLarge
-                    ?.copyWith(fontWeight: FontWeight.bold),
+                style: Theme.of(screen.context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
               ),
               subtitle: const Text('Report CEBS signal'),
               trailing: ElevatedButton(
-                onPressed: () async => await Get.toNamed(
-                    '${Routes.kForm}${FormType.kCEBS}/${FormType.kSignal}'),
+                onPressed: () async => await Get.toNamed('${Routes.kForm}${FormType.kCEBS}/${FormType.kSignal}'),
                 child: const Text('Report'),
               ),
             ),
@@ -57,8 +53,7 @@ class CebsWidget extends ResponsiveWidget<CebsController> {
               ),
               subtitle: const Text('Fill CEBS verification form'),
               trailing: ElevatedButton(
-                onPressed: () async => await Get.toNamed(
-                    '${Routes.kForm}${FormType.kCEBS}/${FormType.kVerification}'),
+                onPressed: () async => await Get.toNamed('${Routes.kForm}${FormType.kCEBS}/${FormType.kVerification}'),
                 child: const Text('Start'),
               ),
             ),
@@ -68,15 +63,11 @@ class CebsWidget extends ResponsiveWidget<CebsController> {
             ListTile(
               title: Text(
                 'CEBS Risk Assessment',
-                style: Theme.of(screen.context)
-                    .textTheme
-                    .bodyLarge
-                    ?.copyWith(fontWeight: FontWeight.bold),
+                style: Theme.of(screen.context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
               ),
               subtitle: const Text('Fill CEBS risk assessment form'),
               trailing: ElevatedButton(
-                onPressed: () async => await Get.toNamed(
-                    '${Routes.kForm}${FormType.kCEBS}/${FormType.kInvestigation}'),
+                onPressed: () async => await Get.toNamed('${Routes.kForm}${FormType.kCEBS}/${FormType.kInvestigation}'),
                 child: const Text('Start'),
               ),
             ),
@@ -86,15 +77,11 @@ class CebsWidget extends ResponsiveWidget<CebsController> {
             ListTile(
               title: Text(
                 'CEBS Response',
-                style: Theme.of(screen.context)
-                    .textTheme
-                    .bodyLarge
-                    ?.copyWith(fontWeight: FontWeight.bold),
+                style: Theme.of(screen.context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
               ),
               subtitle: const Text('Fill CEBS response form'),
               trailing: ElevatedButton(
-                onPressed: () async => await Get.toNamed(
-                    '${Routes.kForm}${FormType.kCEBS}/${FormType.kResponse}'),
+                onPressed: () async => await Get.toNamed('${Routes.kForm}${FormType.kCEBS}/${FormType.kResponse}'),
                 child: const Text('Start'),
               ),
             ),
@@ -104,15 +91,27 @@ class CebsWidget extends ResponsiveWidget<CebsController> {
             ListTile(
               title: Text(
                 'CEBS Escalation',
-                style: Theme.of(screen.context)
-                    .textTheme
-                    .bodyLarge
-                    ?.copyWith(fontWeight: FontWeight.bold),
+                style: Theme.of(screen.context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
               ),
               subtitle: const Text('Fill CEBS escalation form'),
               trailing: ElevatedButton(
-                onPressed: () async => await Get.toNamed(
-                    '${Routes.kForm}${FormType.kCEBS}/${FormType.kEscalation}'),
+                onPressed: () async => await Get.toNamed('${Routes.kForm}${FormType.kCEBS}/${FormType.kEscalation}'),
+                child: const Text('Start'),
+              ),
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            ListTile(
+              title: Text(
+                'CEBS Summary',
+                style: Theme.of(screen.context).textTheme.bodyLarge?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
+              subtitle: const Text('Fill CEBS summary form'),
+              trailing: ElevatedButton(
+                onPressed: () async => await Get.toNamed('${Routes.kForm}${FormType.kCEBS}/${FormType.kSummary}'),
                 child: const Text('Start'),
               ),
             ),

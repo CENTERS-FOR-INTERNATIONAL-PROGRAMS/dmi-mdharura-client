@@ -30,9 +30,7 @@ class MyTasksWidget extends ResponsiveWidget<MyTasksController> {
   Widget? tablet() => Obx(() => Scaffold(
         appBar: AppBar(
           title: const Text('My Tasks'),
-          backgroundColor: controller.state.value == 'Test'
-              ? Colors.black
-              : Colors.lightGreen,
+          backgroundColor: controller.state.value == 'Test' ? Colors.black : Colors.lightGreen,
         ),
         body: RefreshIndicator(
           onRefresh: () async {
@@ -40,8 +38,7 @@ class MyTasksWidget extends ResponsiveWidget<MyTasksController> {
           },
           child: NotificationListener<ScrollNotification>(
             onNotification: (scrollInfo) {
-              if (scrollInfo.metrics.pixels ==
-                  scrollInfo.metrics.maxScrollExtent) controller.fetch(false);
+              if (scrollInfo.metrics.pixels == scrollInfo.metrics.maxScrollExtent) controller.fetch(false);
               return false;
             },
             child: controller.isFetching.isTrue && controller.tasks.isEmpty
@@ -65,9 +62,7 @@ class MyTasksWidget extends ResponsiveWidget<MyTasksController> {
                               ),
                               child: Text(
                                 '${controller.isFetching.isTrue ? 'Loading more... ' : ''}You are viewing ${controller.taskPage.value!.currentTotal} of ${controller.taskPage.value!.total}',
-                                style: Theme.of(screen.context)
-                                    .textTheme
-                                    .bodySmall,
+                                style: Theme.of(screen.context).textTheme.bodySmall,
                               ),
                             ),
                           ],
@@ -94,13 +89,8 @@ class MyTasksWidget extends ResponsiveWidget<MyTasksController> {
 
                                               controller.fetch(true);
                                             },
-                                            items: const [
-                                              'All',
-                                              'Live',
-                                              'Test'
-                                            ],
-                                            labelText:
-                                                'State of signals reported',
+                                            items: const ['All', 'Live', 'Test'],
+                                            labelText: 'State of signals reported',
                                           ),
                                         ),
                                         const SizedBox(
@@ -116,8 +106,7 @@ class MyTasksWidget extends ResponsiveWidget<MyTasksController> {
                               : TaskItemWidget(
                                   task: controller.tasks[index - 1],
                                   isActionable: true,
-                                  refresh: () async =>
-                                      await controller.fetch(true),
+                                  refresh: () async => await controller.fetch(true),
                                 ),
                           itemCount: controller.tasks.length + 1,
                         ),

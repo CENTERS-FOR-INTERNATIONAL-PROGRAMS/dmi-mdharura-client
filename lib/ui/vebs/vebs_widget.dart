@@ -33,15 +33,11 @@ class VebsWidget extends ResponsiveWidget<VebsController> {
             ListTile(
               title: Text(
                 'VEBS Signal',
-                style: Theme.of(screen.context)
-                    .textTheme
-                    .bodyLarge
-                    ?.copyWith(fontWeight: FontWeight.bold),
+                style: Theme.of(screen.context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
               ),
               subtitle: const Text('Report VEBS signal'),
               trailing: ElevatedButton(
-                onPressed: () async => await Get.toNamed(
-                    '${Routes.kForm}${FormType.kVEBS}/${FormType.kSignal}'),
+                onPressed: () async => await Get.toNamed('${Routes.kForm}${FormType.kVEBS}/${FormType.kSignal}'),
                 child: const Text('Report'),
               ),
             ),
@@ -57,8 +53,7 @@ class VebsWidget extends ResponsiveWidget<VebsController> {
               ),
               subtitle: const Text('Fill VEBS verification form'),
               trailing: ElevatedButton(
-                onPressed: () async => await Get.toNamed(
-                    '${Routes.kForm}${FormType.kVEBS}/${FormType.kVerification}'),
+                onPressed: () async => await Get.toNamed('${Routes.kForm}${FormType.kVEBS}/${FormType.kVerification}'),
                 child: const Text('Start'),
               ),
             ),
@@ -68,15 +63,11 @@ class VebsWidget extends ResponsiveWidget<VebsController> {
             ListTile(
               title: Text(
                 'VEBS Risk Assessment',
-                style: Theme.of(screen.context)
-                    .textTheme
-                    .bodyLarge
-                    ?.copyWith(fontWeight: FontWeight.bold),
+                style: Theme.of(screen.context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
               ),
               subtitle: const Text('Fill VEBS risk assessment form'),
               trailing: ElevatedButton(
-                onPressed: () async => await Get.toNamed(
-                    '${Routes.kForm}${FormType.kVEBS}/${FormType.kInvestigation}'),
+                onPressed: () async => await Get.toNamed('${Routes.kForm}${FormType.kVEBS}/${FormType.kInvestigation}'),
                 child: const Text('Start'),
               ),
             ),
@@ -86,15 +77,11 @@ class VebsWidget extends ResponsiveWidget<VebsController> {
             ListTile(
               title: Text(
                 'VEBS Response',
-                style: Theme.of(screen.context)
-                    .textTheme
-                    .bodyLarge
-                    ?.copyWith(fontWeight: FontWeight.bold),
+                style: Theme.of(screen.context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
               ),
               subtitle: const Text('Fill VEBS response form'),
               trailing: ElevatedButton(
-                onPressed: () async => await Get.toNamed(
-                    '${Routes.kForm}${FormType.kVEBS}/${FormType.kResponse}'),
+                onPressed: () async => await Get.toNamed('${Routes.kForm}${FormType.kVEBS}/${FormType.kResponse}'),
                 child: const Text('Start'),
               ),
             ),
@@ -104,15 +91,27 @@ class VebsWidget extends ResponsiveWidget<VebsController> {
             ListTile(
               title: Text(
                 'VEBS Escalation',
-                style: Theme.of(screen.context)
-                    .textTheme
-                    .bodyLarge
-                    ?.copyWith(fontWeight: FontWeight.bold),
+                style: Theme.of(screen.context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
               ),
               subtitle: const Text('Fill VEBS escalation form'),
               trailing: ElevatedButton(
-                onPressed: () async => await Get.toNamed(
-                    '${Routes.kForm}${FormType.kVEBS}/${FormType.kEscalation}'),
+                onPressed: () async => await Get.toNamed('${Routes.kForm}${FormType.kVEBS}/${FormType.kEscalation}'),
+                child: const Text('Start'),
+              ),
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            ListTile(
+              title: Text(
+                'VEBS Summary',
+                style: Theme.of(screen.context).textTheme.bodyLarge?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
+              subtitle: const Text('Fill VEBS summary form'),
+              trailing: ElevatedButton(
+                onPressed: () async => await Get.toNamed('${Routes.kForm}${FormType.kVEBS}/${FormType.kSummary}'),
                 child: const Text('Start'),
               ),
             ),

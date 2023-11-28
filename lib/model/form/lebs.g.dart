@@ -26,7 +26,13 @@ Lebs _$LebsFromJson(Map<String, dynamic> json) => Lebs()
   ..escalationForm = json['escalationForm'] == null
       ? null
       : LebsEscalationForm.fromJson(
-          json['escalationForm'] as Map<String, dynamic>);
+          json['escalationForm'] as Map<String, dynamic>)
+  ..summaryForm = json['summaryForm'] == null
+      ? null
+      : LebsSummaryForm.fromJson(json['summaryForm'] as Map<String, dynamic>)
+  ..labForm = json['labForm'] == null
+      ? null
+      : LebsLabForm.fromJson(json['labForm'] as Map<String, dynamic>);
 
 Map<String, dynamic> _$LebsToJson(Lebs instance) {
   final val = <String, dynamic>{};
@@ -44,5 +50,7 @@ Map<String, dynamic> _$LebsToJson(Lebs instance) {
   writeNotNull('investigationForm', instance.investigationForm);
   writeNotNull('responseForm', instance.responseForm);
   writeNotNull('escalationForm', instance.escalationForm);
+  writeNotNull('summaryForm', instance.summaryForm);
+  writeNotNull('labForm', instance.labForm);
   return val;
 }

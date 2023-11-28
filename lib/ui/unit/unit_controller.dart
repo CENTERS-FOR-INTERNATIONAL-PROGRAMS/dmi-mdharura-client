@@ -4,8 +4,7 @@ import 'package:m_dharura/api/unit_api.dart';
 import 'package:m_dharura/helper/util.dart';
 import 'package:m_dharura/model/unit.dart';
 
-class UnitController extends GetxController
-    with GetSingleTickerProviderStateMixin {
+class UnitController extends GetxController with GetTickerProviderStateMixin {
   var isFetching = false.obs;
   var isUpdating = false.obs;
   var isDeleting = false.obs;
@@ -28,14 +27,19 @@ class UnitController extends GetxController
     fetch();
   }
 
+  @override
+  void onClose() {
+    tabController.dispose();
+    super.onClose();
+  }
+
   fetch() async {
     if (isFetching.isTrue) return;
 
     isFetching.value = true;
 
     try {
-      var unitFetched =
-          (await _unitApi.retrieve({'unitId': unitId})).data!.unit!;
+      var unitFetched = (await _unitApi.retrieve({'unitId': unitId})).data!.unit!;
 
       tabController = TabController(
           initialIndex: position.value,
@@ -65,8 +69,7 @@ class UnitController extends GetxController
     isUpdating.value = true;
 
     try {
-      unit.value =
-          (await _unitApi.update(unitId, {'state': state})).data?.unit!;
+      unit.value = (await _unitApi.update(unitId, {'state': state})).data?.unit!;
     } catch (e) {
       Util.toast(e);
     }

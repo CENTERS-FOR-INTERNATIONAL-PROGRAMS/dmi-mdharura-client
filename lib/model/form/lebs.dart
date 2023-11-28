@@ -2,7 +2,9 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:m_dharura/helper/base_object.dart';
 import 'package:m_dharura/model/form/lebs/lebs_escalation_form.dart';
 import 'package:m_dharura/model/form/lebs/lebs_investigation_form.dart';
+import 'package:m_dharura/model/form/lebs/lebs_lab_form.dart';
 import 'package:m_dharura/model/form/lebs/lebs_response_form.dart';
+import 'package:m_dharura/model/form/lebs/lebs_summary_form.dart';
 import 'package:m_dharura/model/form/lebs/lebs_verification_form.dart';
 
 part 'lebs.g.dart';
@@ -13,6 +15,8 @@ class Lebs extends BaseObject {
   LebsInvestigationForm? investigationForm;
   LebsResponseForm? responseForm;
   LebsEscalationForm? escalationForm;
+  LebsSummaryForm? summaryForm;
+  LebsLabForm? labForm;
 
   static Lebs fromJson(dynamic json) => _$LebsFromJson(json);
 

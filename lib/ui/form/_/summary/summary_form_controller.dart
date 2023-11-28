@@ -8,25 +8,27 @@ import 'package:m_dharura/constant/routes.dart';
 import 'package:m_dharura/db/db.dart';
 import 'package:m_dharura/helper/extension.dart';
 import 'package:m_dharura/helper/session.dart';
+import 'package:m_dharura/helper/signal.dart';
 import 'package:m_dharura/helper/util.dart';
-import 'package:m_dharura/model/form/lebs/lebs_response_form.dart';
+import 'package:m_dharura/model/form/_/summary_form.dart';
 import 'package:m_dharura/model/pending.dart';
 import 'package:m_dharura/ui/_/dialog_widget.dart';
 import 'package:m_dharura/ui/pending/pending_controller.dart';
 
-class LebsResponseFormController extends GetxController {
+class SummaryFormController extends GetxController {
   var isFetching = false.obs;
   var isAdding = false.obs;
+  final int total = 5;
   var pages = [0].obs;
-  final int total = 14;
 
-  Rx<LebsResponseForm> form = Rx(LebsResponseForm());
+  Rx<SummaryForm> form = Rx(SummaryForm());
 
   final _taskApi = Get.put(TaskApi());
 
   final String? signalId;
+  final String type;
 
-  LebsResponseFormController({this.signalId});
+  SummaryFormController({required this.type, this.signalId});
 
   Rx<String?> signal = Rx(null);
 
@@ -39,10 +41,10 @@ class LebsResponseFormController extends GetxController {
     try {
       var box = await Db.pending();
 
-      var pending = box.get('${signal.value}_lebs_response');
+      var pending = box.get('${signal.value}_summary');
 
       if (pending != null) {
-        form.value = LebsResponseForm.fromJson(pending.form);
+        form.value = SummaryForm.fromJson(pending.form);
       }
     } catch (e) {
       if (kDebugMode) {
@@ -61,8 +63,8 @@ class LebsResponseFormController extends GetxController {
 
       var task = (await _taskApi.updateForm(
         signal.value!.trim(),
-        'lebs',
-        'response',
+        type,
+        'summary',
         form.toJson(),
         version: 'v2',
       ))
@@ -78,7 +80,8 @@ class LebsResponseFormController extends GetxController {
           DialogWidget(
             title: 'Submit form using SMS?',
             content: 'You are about to submit this form using SMS. Please confirm',
-            onConfirm: () async => await Util.sms(kSmsShortCode, '${kSmsPrefix}lr ${signal.value!.trim()} ${jsonEncode(form.value.toJson().trim())}'),
+            onConfirm: () async =>
+                await Util.sms(kSmsShortCode, '$kSmsPrefix${signalPrefix(type)}i ${signal.value!.trim()} ${jsonEncode(form.value.toJson().trim())}'),
           ),
         );
       }
@@ -102,74 +105,22 @@ class LebsResponseFormController extends GetxController {
             page += 1;
             break;
           case 1:
-            if (f.dateSCMOHInformed == null) throw 'Please select';
-            page += 1;
+            if (f.eventStatus == null) throw 'Please select';
+            if (f.eventStatus!.toLowerCase() == 'escalated') {
+              page += 1;
+              break;
+            }
+            page += 2;
             break;
           case 2:
-            if (f.dateResponseStarted == null) throw 'Please select';
+            if (f.escalatedTo == null) throw 'Please type';
             page += 1;
             break;
           case 3:
-            if (f.humansCases == null) throw 'Please type';
+            if (f.cause == null) throw 'Please type';
             page += 1;
             break;
-          case 4:
-            if (f.responseActivities == null || f.responseActivities!.isEmpty) {
-              throw 'Please select';
-            }
-            if (!f.responseActivities!.contains('Quarantine')) {
-              if (!f.responseActivities!.contains('Isolation')) {
-                page += 6;
-                break;
-              }
-              page += 4;
-              break;
-            }
-            page += 1;
-            break;
-          case 5:
-            if (f.humansQuarantined == null) throw 'Please type';
-            page += 1;
-            break;
-          case 6:
-            if (f.quarantineTypes == null || f.quarantineTypes!.isEmpty) {
-              throw 'Please select';
-            }
-            page += 1;
-            break;
-          case 7:
-            if (f.isHumansQuarantinedFollowedUp == null) throw 'Please select';
 
-            if (!f.responseActivities!.contains('Isolation')) {
-              page += 3;
-              break;
-            }
-            page += 1;
-            break;
-          case 8:
-            if (f.isHumansIsolated == null) throw 'Please select';
-            page += 1;
-            break;
-          case 9:
-            if (f.isolationTypes == null || f.isolationTypes!.isEmpty) {
-              throw 'Please select';
-            }
-            page += 1;
-            break;
-          case 10:
-            if (f.humansDead == null) throw 'Please type';
-            page += 1;
-            break;
-          case 11:
-            if (f.eventStatuses == null || f.eventStatuses!.isEmpty) {
-              throw 'Please select';
-            }
-            page += 1;
-            break;
-          case 12:
-            if (f.additionalInformation == null || f.additionalInformation!.isEmpty) throw 'Please type';
-            page += 1;
-            break;
           default:
             page += 1;
         }
@@ -201,11 +152,11 @@ class LebsResponseFormController extends GetxController {
             var box = await Db.pending();
 
             await box.put(
-                '${signal.value}_lebs_response',
+                '${signal.value}_summary',
                 Pending()
                   ..signalId = signal.value!
-                  ..type = 'lebs'
-                  ..subType = 'response'
+                  ..type = type
+                  ..subType = 'summary'
                   ..form = form.value.toJson());
 
             Get.put(

@@ -25,7 +25,10 @@ Vebs _$VebsFromJson(Map<String, dynamic> json) => Vebs()
       : ResponseForm.fromJson(json['responseForm'] as Map<String, dynamic>)
   ..escalationForm = json['escalationForm'] == null
       ? null
-      : EscalationForm.fromJson(json['escalationForm'] as Map<String, dynamic>);
+      : EscalationForm.fromJson(json['escalationForm'] as Map<String, dynamic>)
+  ..summaryForm = json['summaryForm'] == null
+      ? null
+      : SummaryForm.fromJson(json['summaryForm'] as Map<String, dynamic>);
 
 Map<String, dynamic> _$VebsToJson(Vebs instance) {
   final val = <String, dynamic>{};
@@ -43,5 +46,6 @@ Map<String, dynamic> _$VebsToJson(Vebs instance) {
   writeNotNull('investigationForm', instance.investigationForm);
   writeNotNull('responseForm', instance.responseForm);
   writeNotNull('escalationForm', instance.escalationForm);
+  writeNotNull('summaryForm', instance.summaryForm);
   return val;
 }

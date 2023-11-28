@@ -29,81 +29,61 @@ class TaskItemWidget extends StatelessWidget {
           title: 'PEBS/MEBS Verification Request',
           date: null,
           user: null,
-          onClick: !isActionable ||
-                  (task.lebs != null && task.lebs?.verificationForm != null)
+          onClick: !isActionable || (task.lebs != null && task.lebs?.verificationForm != null)
               ? null
               : () async {
-                  await Get.toNamed(
-                      '${Routes.kForm}${FormType.kPMEBS}/${FormType.kRequest}',
-                      arguments: {'signalId': task.signalId});
+                  await Get.toNamed('${Routes.kForm}${FormType.kPMEBS}/${FormType.kRequest}', arguments: {'signalId': task.signalId});
 
                   refresh!();
                 },
         ),
       ];
-    } else if (task.signal.startsWith('l') ||
-        task.signal.startsWith('p') ||
-        task.signal.startsWith('m')) {
+    } else if (task.signal.startsWith('l') || task.signal.startsWith('p') || task.signal.startsWith('m')) {
       return [
         TaskFormItem(
-          title: 'LEBS Response',
-          date: task.lebs != null && task.lebs?.responseForm != null
-              ? task.lebs?.responseForm?.createdAt
-              : null,
-          user: task.lebs != null && task.lebs?.responseForm != null
-              ? task.lebs?.responseForm?.user
-              : null,
-          onClick: !isActionable ||
-                  task.lebs == null ||
-                  (task.lebs != null &&
-                      (task.lebs?.responseForm != null ||
-                          task.lebs?.investigationForm == null))
+          title: 'LEBS Summary',
+          date: task.lebs != null && task.lebs?.summaryForm != null ? task.lebs?.summaryForm?.createdAt : null,
+          user: task.lebs != null && task.lebs?.summaryForm != null ? task.lebs?.summaryForm?.user : null,
+          onClick: !isActionable || task.lebs == null || (task.lebs != null && (task.lebs?.summaryForm != null || task.lebs?.investigationForm == null))
               ? null
               : () async {
-                  await Get.toNamed(
-                      '${Routes.kForm}${FormType.kLEBS}/${FormType.kResponse}',
-                      arguments: {'signalId': task.signalId});
+                  await Get.toNamed('${Routes.kForm}${FormType.kLEBS}/${FormType.kSummary}', arguments: {'signalId': task.signalId});
+
+                  refresh!();
+                },
+        ),
+        TaskFormItem(
+          title: 'LEBS Response',
+          date: task.lebs != null && task.lebs?.responseForm != null ? task.lebs?.responseForm?.createdAt : null,
+          user: task.lebs != null && task.lebs?.responseForm != null ? task.lebs?.responseForm?.user : null,
+          onClick: !isActionable || task.lebs == null || (task.lebs != null && (task.lebs?.responseForm != null || task.lebs?.investigationForm == null))
+              ? null
+              : () async {
+                  await Get.toNamed('${Routes.kForm}${FormType.kLEBS}/${FormType.kResponse}', arguments: {'signalId': task.signalId});
 
                   refresh!();
                 },
         ),
         TaskFormItem(
           title: 'LEBS Risk Assessment',
-          date: task.lebs != null && task.lebs?.investigationForm != null
-              ? task.lebs?.investigationForm?.createdAt
-              : null,
-          user: task.lebs != null && task.lebs?.investigationForm != null
-              ? task.lebs?.investigationForm?.user
-              : null,
-          onClick: !isActionable ||
-                  task.lebs == null ||
-                  (task.lebs != null &&
-                      (task.lebs?.investigationForm != null ||
-                          task.lebs?.verificationForm == null))
+          date: task.lebs != null && task.lebs?.investigationForm != null ? task.lebs?.investigationForm?.createdAt : null,
+          user: task.lebs != null && task.lebs?.investigationForm != null ? task.lebs?.investigationForm?.user : null,
+          onClick: !isActionable || task.lebs == null || (task.lebs != null && (task.lebs?.investigationForm != null || task.lebs?.verificationForm == null))
               ? null
               : () async {
-                  await Get.toNamed(
-                      '${Routes.kForm}${FormType.kLEBS}/${FormType.kInvestigation}',
-                      arguments: {'signalId': task.signalId});
+                  await Get.toNamed('${Routes.kForm}${FormType.kLEBS}/${FormType.kInvestigation}', arguments: {'signalId': task.signalId});
 
                   refresh!();
                 },
         ),
         TaskFormItem(
           title: 'LEBS Verification',
-          date: task.lebs != null && task.lebs?.verificationForm != null
-              ? task.lebs?.verificationForm?.createdAt
-              : null,
-          user: task.lebs != null && task.lebs?.verificationForm != null
-              ? task.lebs?.verificationForm?.user
-              : null,
-          onClick: !isActionable ||
-                  (task.lebs != null && task.lebs?.verificationForm != null)
+          date: task.lebs != null && task.lebs?.verificationForm != null ? task.lebs?.verificationForm?.createdAt : null,
+          user: task.lebs != null && task.lebs?.verificationForm != null ? task.lebs?.verificationForm?.user : null,
+          onClick: !isActionable || (task.lebs != null && task.lebs?.verificationForm != null)
               ? null
               : () async {
-                  await Get.toNamed(
-                      '${Routes.kForm}${FormType.kLEBS}/${FormType.kVerification}',
-                      arguments: {'signalId': task.signalId});
+                  await Get.toNamed('${Routes.kForm}${FormType.kLEBS}/${FormType.kVerification}', arguments: {'signalId': task.signalId});
 
                   refresh!();
                 },
@@ -112,86 +92,61 @@ class TaskItemWidget extends StatelessWidget {
     } else if (task.signal.startsWith('h')) {
       return [
         TaskFormItem(
-          title: 'HEBS Escalation',
-          date: task.hebs != null && task.hebs?.escalationForm != null
-              ? task.hebs?.escalationForm?.createdAt
-              : null,
-          user: task.hebs != null && task.hebs?.escalationForm != null
-              ? task.hebs?.escalationForm?.user
-              : null,
-          onClick: !isActionable ||
-                  task.hebs == null ||
-                  (task.hebs != null &&
-                      (task.hebs?.escalationForm != null ||
-                          task.hebs?.responseForm == null))
+          title: 'HEBS Summary',
+          date: task.hebs != null && task.hebs?.summaryForm != null ? task.hebs?.summaryForm?.createdAt : null,
+          user: task.hebs != null && task.hebs?.summaryForm != null ? task.hebs?.summaryForm?.user : null,
+          onClick: !isActionable || task.hebs == null || (task.hebs != null && (task.hebs?.summaryForm != null || task.hebs?.responseForm == null))
               ? null
               : () async {
-                  await Get.toNamed(
-                      '${Routes.kForm}${FormType.kHEBS}/${FormType.kEscalation}',
-                      arguments: {'signalId': task.signalId});
+                  await Get.toNamed('${Routes.kForm}${FormType.kHEBS}/${FormType.kSummary}', arguments: {'signalId': task.signalId});
+
+                  refresh!();
+                },
+        ),
+        TaskFormItem(
+          title: 'HEBS Escalation',
+          date: task.hebs != null && task.hebs?.escalationForm != null ? task.hebs?.escalationForm?.createdAt : null,
+          user: task.hebs != null && task.hebs?.escalationForm != null ? task.hebs?.escalationForm?.user : null,
+          onClick: !isActionable || task.hebs == null || (task.hebs != null && (task.hebs?.escalationForm != null || task.hebs?.responseForm == null))
+              ? null
+              : () async {
+                  await Get.toNamed('${Routes.kForm}${FormType.kHEBS}/${FormType.kEscalation}', arguments: {'signalId': task.signalId});
 
                   refresh!();
                 },
         ),
         TaskFormItem(
           title: 'HEBS Response',
-          date: task.hebs != null && task.hebs?.responseForm != null
-              ? task.hebs?.responseForm?.createdAt
-              : null,
-          user: task.hebs != null && task.hebs?.responseForm != null
-              ? task.hebs?.responseForm?.user
-              : null,
-          onClick: !isActionable ||
-                  task.hebs == null ||
-                  (task.hebs != null &&
-                      (task.hebs?.responseForm != null ||
-                          task.hebs?.investigationForm == null))
+          date: task.hebs != null && task.hebs?.responseForm != null ? task.hebs?.responseForm?.createdAt : null,
+          user: task.hebs != null && task.hebs?.responseForm != null ? task.hebs?.responseForm?.user : null,
+          onClick: !isActionable || task.hebs == null || (task.hebs != null && (task.hebs?.responseForm != null || task.hebs?.investigationForm == null))
               ? null
               : () async {
-                  await Get.toNamed(
-                      '${Routes.kForm}${FormType.kHEBS}/${FormType.kResponse}',
-                      arguments: {'signalId': task.signalId});
+                  await Get.toNamed('${Routes.kForm}${FormType.kHEBS}/${FormType.kResponse}', arguments: {'signalId': task.signalId});
 
                   refresh!();
                 },
         ),
         TaskFormItem(
           title: 'HEBS Risk Assessment',
-          date: task.hebs != null && task.hebs?.investigationForm != null
-              ? task.hebs?.investigationForm?.createdAt
-              : null,
-          user: task.hebs != null && task.hebs?.investigationForm != null
-              ? task.hebs?.investigationForm?.user
-              : null,
-          onClick: !isActionable ||
-                  task.hebs == null ||
-                  (task.hebs != null &&
-                      (task.hebs?.investigationForm != null ||
-                          task.hebs?.verificationForm == null))
+          date: task.hebs != null && task.hebs?.investigationForm != null ? task.hebs?.investigationForm?.createdAt : null,
+          user: task.hebs != null && task.hebs?.investigationForm != null ? task.hebs?.investigationForm?.user : null,
+          onClick: !isActionable || task.hebs == null || (task.hebs != null && (task.hebs?.investigationForm != null || task.hebs?.verificationForm == null))
               ? null
               : () async {
-                  await Get.toNamed(
-                      '${Routes.kForm}${FormType.kHEBS}/${FormType.kInvestigation}',
-                      arguments: {'signalId': task.signalId});
+                  await Get.toNamed('${Routes.kForm}${FormType.kHEBS}/${FormType.kInvestigation}', arguments: {'signalId': task.signalId});
 
                   refresh!();
                 },
         ),
         TaskFormItem(
           title: 'HEBS Verification',
-          date: task.hebs != null && task.hebs?.verificationForm != null
-              ? task.hebs?.verificationForm?.createdAt
-              : null,
-          user: task.hebs != null && task.hebs?.verificationForm != null
-              ? task.hebs?.verificationForm?.user
-              : null,
-          onClick: !isActionable ||
-                  (task.hebs != null && task.hebs?.verificationForm != null)
+          date: task.hebs != null && task.hebs?.verificationForm != null ? task.hebs?.verificationForm?.createdAt : null,
+          user: task.hebs != null && task.hebs?.verificationForm != null ? task.hebs?.verificationForm?.user : null,
+          onClick: !isActionable || (task.hebs != null && task.hebs?.verificationForm != null)
               ? null
               : () async {
-                  await Get.toNamed(
-                      '${Routes.kForm}${FormType.kHEBS}/${FormType.kVerification}',
-                      arguments: {'signalId': task.signalId});
+                  await Get.toNamed('${Routes.kForm}${FormType.kHEBS}/${FormType.kVerification}', arguments: {'signalId': task.signalId});
 
                   refresh!();
                 },
@@ -200,86 +155,61 @@ class TaskItemWidget extends StatelessWidget {
     } else if (task.signal.startsWith('v')) {
       return [
         TaskFormItem(
-          title: 'VEBS Escalation',
-          date: task.vebs != null && task.vebs?.escalationForm != null
-              ? task.vebs?.escalationForm?.createdAt
-              : null,
-          user: task.vebs != null && task.vebs?.escalationForm != null
-              ? task.vebs?.escalationForm?.user
-              : null,
-          onClick: !isActionable ||
-                  task.vebs == null ||
-                  (task.vebs != null &&
-                      (task.vebs?.escalationForm != null ||
-                          task.vebs?.responseForm == null))
+          title: 'VEBS Summary',
+          date: task.vebs != null && task.vebs?.summaryForm != null ? task.vebs?.summaryForm?.createdAt : null,
+          user: task.vebs != null && task.vebs?.summaryForm != null ? task.vebs?.summaryForm?.user : null,
+          onClick: !isActionable || task.vebs == null || (task.vebs != null && (task.vebs?.summaryForm != null || task.vebs?.responseForm == null))
               ? null
               : () async {
-                  await Get.toNamed(
-                      '${Routes.kForm}${FormType.kVEBS}/${FormType.kEscalation}',
-                      arguments: {'signalId': task.signalId});
+                  await Get.toNamed('${Routes.kForm}${FormType.kVEBS}/${FormType.kSummary}', arguments: {'signalId': task.signalId});
+
+                  refresh!();
+                },
+        ),
+        TaskFormItem(
+          title: 'VEBS Escalation',
+          date: task.vebs != null && task.vebs?.escalationForm != null ? task.vebs?.escalationForm?.createdAt : null,
+          user: task.vebs != null && task.vebs?.escalationForm != null ? task.vebs?.escalationForm?.user : null,
+          onClick: !isActionable || task.vebs == null || (task.vebs != null && (task.vebs?.escalationForm != null || task.vebs?.responseForm == null))
+              ? null
+              : () async {
+                  await Get.toNamed('${Routes.kForm}${FormType.kVEBS}/${FormType.kEscalation}', arguments: {'signalId': task.signalId});
 
                   refresh!();
                 },
         ),
         TaskFormItem(
           title: 'VEBS Response',
-          date: task.vebs != null && task.vebs?.responseForm != null
-              ? task.vebs?.responseForm?.createdAt
-              : null,
-          user: task.vebs != null && task.vebs?.responseForm != null
-              ? task.vebs?.responseForm?.user
-              : null,
-          onClick: !isActionable ||
-                  task.vebs == null ||
-                  (task.vebs != null &&
-                      (task.vebs?.responseForm != null ||
-                          task.vebs?.investigationForm == null))
+          date: task.vebs != null && task.vebs?.responseForm != null ? task.vebs?.responseForm?.createdAt : null,
+          user: task.vebs != null && task.vebs?.responseForm != null ? task.vebs?.responseForm?.user : null,
+          onClick: !isActionable || task.vebs == null || (task.vebs != null && (task.vebs?.responseForm != null || task.vebs?.investigationForm == null))
               ? null
               : () async {
-                  await Get.toNamed(
-                      '${Routes.kForm}${FormType.kVEBS}/${FormType.kResponse}',
-                      arguments: {'signalId': task.signalId});
+                  await Get.toNamed('${Routes.kForm}${FormType.kVEBS}/${FormType.kResponse}', arguments: {'signalId': task.signalId});
 
                   refresh!();
                 },
         ),
         TaskFormItem(
           title: 'VEBS Risk Assessment',
-          date: task.vebs != null && task.vebs?.investigationForm != null
-              ? task.vebs?.investigationForm?.createdAt
-              : null,
-          user: task.vebs != null && task.vebs?.investigationForm != null
-              ? task.vebs?.investigationForm?.user
-              : null,
-          onClick: !isActionable ||
-                  task.vebs == null ||
-                  (task.vebs != null &&
-                      (task.vebs?.investigationForm != null ||
-                          task.vebs?.verificationForm == null))
+          date: task.vebs != null && task.vebs?.investigationForm != null ? task.vebs?.investigationForm?.createdAt : null,
+          user: task.vebs != null && task.vebs?.investigationForm != null ? task.vebs?.investigationForm?.user : null,
+          onClick: !isActionable || task.vebs == null || (task.vebs != null && (task.vebs?.investigationForm != null || task.vebs?.verificationForm == null))
               ? null
               : () async {
-                  await Get.toNamed(
-                      '${Routes.kForm}${FormType.kVEBS}/${FormType.kInvestigation}',
-                      arguments: {'signalId': task.signalId});
+                  await Get.toNamed('${Routes.kForm}${FormType.kVEBS}/${FormType.kInvestigation}', arguments: {'signalId': task.signalId});
 
                   refresh!();
                 },
         ),
         TaskFormItem(
           title: 'VEBS Verification',
-          date: task.vebs != null && task.vebs?.verificationForm != null
-              ? task.vebs?.verificationForm?.createdAt
-              : null,
-          user: task.vebs != null && task.vebs?.verificationForm != null
-              ? task.vebs?.verificationForm?.user
-              : null,
-          onClick: !isActionable ||
-                  (task.vebs != null && task.vebs?.verificationForm != null)
+          date: task.vebs != null && task.vebs?.verificationForm != null ? task.vebs?.verificationForm?.createdAt : null,
+          user: task.vebs != null && task.vebs?.verificationForm != null ? task.vebs?.verificationForm?.user : null,
+          onClick: !isActionable || (task.vebs != null && task.vebs?.verificationForm != null)
               ? null
               : () async {
-                  await Get.toNamed(
-                      '${Routes.kForm}${FormType.kVEBS}/${FormType.kVerification}',
-                      arguments: {'signalId': task.signalId});
+                  await Get.toNamed('${Routes.kForm}${FormType.kVEBS}/${FormType.kVerification}', arguments: {'signalId': task.signalId});
 
                   refresh!();
                 },
@@ -288,86 +218,61 @@ class TaskItemWidget extends StatelessWidget {
     } else {
       return [
         TaskFormItem(
-          title: 'CEBS Escalation',
-          date: task.cebs != null && task.cebs?.escalationForm != null
-              ? task.cebs?.escalationForm?.createdAt
-              : null,
-          user: task.cebs != null && task.cebs?.escalationForm != null
-              ? task.cebs?.escalationForm?.user
-              : null,
-          onClick: !isActionable ||
-                  task.cebs == null ||
-                  (task.cebs != null &&
-                      (task.cebs?.escalationForm != null ||
-                          task.cebs?.responseForm == null))
+          title: 'CEBS Summary',
+          date: task.cebs != null && task.cebs?.summaryForm != null ? task.cebs?.summaryForm?.createdAt : null,
+          user: task.cebs != null && task.cebs?.summaryForm != null ? task.cebs?.summaryForm?.user : null,
+          onClick: !isActionable || task.cebs == null || (task.cebs != null && (task.cebs?.summaryForm != null || task.cebs?.responseForm == null))
               ? null
               : () async {
-                  await Get.toNamed(
-                      '${Routes.kForm}${FormType.kCEBS}/${FormType.kEscalation}',
-                      arguments: {'signalId': task.signalId});
+                  await Get.toNamed('${Routes.kForm}${FormType.kCEBS}/${FormType.kSummary}', arguments: {'signalId': task.signalId});
+
+                  refresh!();
+                },
+        ),
+        TaskFormItem(
+          title: 'CEBS Escalation',
+          date: task.cebs != null && task.cebs?.escalationForm != null ? task.cebs?.escalationForm?.createdAt : null,
+          user: task.cebs != null && task.cebs?.escalationForm != null ? task.cebs?.escalationForm?.user : null,
+          onClick: !isActionable || task.cebs == null || (task.cebs != null && (task.cebs?.escalationForm != null || task.cebs?.responseForm == null))
+              ? null
+              : () async {
+                  await Get.toNamed('${Routes.kForm}${FormType.kCEBS}/${FormType.kEscalation}', arguments: {'signalId': task.signalId});
 
                   refresh!();
                 },
         ),
         TaskFormItem(
           title: 'CEBS Response',
-          date: task.cebs != null && task.cebs?.responseForm != null
-              ? task.cebs?.responseForm?.createdAt
-              : null,
-          user: task.cebs != null && task.cebs?.responseForm != null
-              ? task.cebs?.responseForm?.user
-              : null,
-          onClick: !isActionable ||
-                  task.cebs == null ||
-                  (task.cebs != null &&
-                      (task.cebs?.responseForm != null ||
-                          task.cebs?.investigationForm == null))
+          date: task.cebs != null && task.cebs?.responseForm != null ? task.cebs?.responseForm?.createdAt : null,
+          user: task.cebs != null && task.cebs?.responseForm != null ? task.cebs?.responseForm?.user : null,
+          onClick: !isActionable || task.cebs == null || (task.cebs != null && (task.cebs?.responseForm != null || task.cebs?.investigationForm == null))
               ? null
               : () async {
-                  await Get.toNamed(
-                      '${Routes.kForm}${FormType.kCEBS}/${FormType.kResponse}',
-                      arguments: {'signalId': task.signalId});
+                  await Get.toNamed('${Routes.kForm}${FormType.kCEBS}/${FormType.kResponse}', arguments: {'signalId': task.signalId});
 
                   refresh!();
                 },
         ),
         TaskFormItem(
           title: 'CEBS Risk Assessment',
-          date: task.cebs != null && task.cebs?.investigationForm != null
-              ? task.cebs?.investigationForm?.createdAt
-              : null,
-          user: task.cebs != null && task.cebs?.investigationForm != null
-              ? task.cebs?.investigationForm?.user
-              : null,
-          onClick: !isActionable ||
-                  task.cebs == null ||
-                  (task.cebs != null &&
-                      (task.cebs?.investigationForm != null ||
-                          task.cebs?.verificationForm == null))
+          date: task.cebs != null && task.cebs?.investigationForm != null ? task.cebs?.investigationForm?.createdAt : null,
+          user: task.cebs != null && task.cebs?.investigationForm != null ? task.cebs?.investigationForm?.user : null,
+          onClick: !isActionable || task.cebs == null || (task.cebs != null && (task.cebs?.investigationForm != null || task.cebs?.verificationForm == null))
               ? null
               : () async {
-                  await Get.toNamed(
-                      '${Routes.kForm}${FormType.kCEBS}/${FormType.kInvestigation}',
-                      arguments: {'signalId': task.signalId});
+                  await Get.toNamed('${Routes.kForm}${FormType.kCEBS}/${FormType.kInvestigation}', arguments: {'signalId': task.signalId});
 
                   refresh!();
                 },
         ),
         TaskFormItem(
           title: 'CEBS Verification',
-          date: task.cebs != null && task.cebs?.verificationForm != null
-              ? task.cebs?.verificationForm?.createdAt
-              : null,
-          user: task.cebs != null && task.cebs?.verificationForm != null
-              ? task.cebs?.verificationForm?.user
-              : null,
-          onClick: !isActionable ||
-                  (task.cebs != null && task.cebs?.verificationForm != null)
+          date: task.cebs != null && task.cebs?.verificationForm != null ? task.cebs?.verificationForm?.createdAt : null,
+          user: task.cebs != null && task.cebs?.verificationForm != null ? task.cebs?.verificationForm?.user : null,
+          onClick: !isActionable || (task.cebs != null && task.cebs?.verificationForm != null)
               ? null
               : () async {
-                  await Get.toNamed(
-                      '${Routes.kForm}${FormType.kCEBS}/${FormType.kVerification}',
-                      arguments: {'signalId': task.signalId});
+                  await Get.toNamed('${Routes.kForm}${FormType.kCEBS}/${FormType.kVerification}', arguments: {'signalId': task.signalId});
 
                   refresh!();
                 },
@@ -385,21 +290,11 @@ class TaskItemWidget extends StatelessWidget {
       if (task.status == 'pending') {
         var item = items.firstWhere((element) => element.user == null);
 
-        return TaskFormItemWidget(
-            title: item.title,
-            date: item.date,
-            user: item.user,
-            onClick: item.onClick,
-            actionText: 'Submit');
+        return TaskFormItemWidget(title: item.title, date: item.date, user: item.user, onClick: item.onClick, actionText: 'Submit');
       } else {
         var item = items.lastWhere((element) => element.user != null);
 
-        return TaskFormItemWidget(
-            title: item.title,
-            date: item.date,
-            user: item.user,
-            onClick: item.onClick,
-            actionText: 'Submit');
+        return TaskFormItemWidget(title: item.title, date: item.date, user: item.user, onClick: item.onClick, actionText: 'Submit');
       }
     } catch (e) {
       return Container();
@@ -453,9 +348,7 @@ class TaskItemWidget extends StatelessWidget {
                 child: Text(
                   task.state.capitalize ?? '',
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: task.state == 'test'
-                            ? Colors.black
-                            : Theme.of(context).primaryColor,
+                        color: task.state == 'test' ? Colors.black : Theme.of(context).primaryColor,
                       ),
                 ),
               ),
@@ -495,8 +388,7 @@ class TaskItemWidget extends StatelessWidget {
                     width: 16,
                   ),
                   ElevatedButton(
-                    onPressed: () async =>
-                        await Get.toNamed('${Routes.kTask}${task.id}'),
+                    onPressed: () async => await Get.toNamed('${Routes.kTask}${task.id}'),
                     child: const Text('View'),
                   )
                 ],
