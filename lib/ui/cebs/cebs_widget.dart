@@ -116,6 +116,22 @@ class CebsWidget extends ResponsiveWidget<CebsController> {
               ),
             ),
             const SizedBox(
+              height: 8,
+            ),
+            ListTile(
+              title: Text(
+                'CEBS Lab',
+                style: Theme.of(screen.context).textTheme.bodyLarge?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
+              subtitle: const Text('Fill CEBS lab form'),
+              trailing: ElevatedButton(
+                onPressed: () async => await Get.toNamed('${Routes.kForm}${FormType.kCEBS}/${FormType.kLab}'),
+                child: const Text('Start'),
+              ),
+            ),
+            const SizedBox(
               height: 24,
             ),
           ],

@@ -118,6 +118,22 @@ class VebsWidget extends ResponsiveWidget<VebsController> {
             const SizedBox(
               height: 24,
             ),
+            ListTile(
+              title: Text(
+                'VEBS Lab',
+                style: Theme.of(screen.context).textTheme.bodyLarge?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
+              subtitle: const Text('Fill VEBS lab form'),
+              trailing: ElevatedButton(
+                onPressed: () async => await Get.toNamed('${Routes.kForm}${FormType.kVEBS}/${FormType.kLab}'),
+                child: const Text('Start'),
+              ),
+            ),
+            const SizedBox(
+              height: 24,
+            ),
           ],
         ),
       );

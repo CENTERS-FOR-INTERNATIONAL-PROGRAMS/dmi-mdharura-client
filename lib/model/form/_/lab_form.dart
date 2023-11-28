@@ -7,7 +7,7 @@ part 'lab_form.g.dart';
 @JsonSerializable()
 class LabForm extends BaseObject {
   User? user;
-  DateTime? dateOfSampleCollected;
+  DateTime? dateSampleCollected;
   String? labResults;
   DateTime? dateLabResultsReceived;
 
