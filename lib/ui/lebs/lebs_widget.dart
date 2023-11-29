@@ -122,12 +122,12 @@ class LebsWidget extends ResponsiveWidget<LebsController> {
             ),
             ListTile(
               title: Text(
-                'LEBS Lab',
+                'LEBS Lab Results',
                 style: Theme.of(screen.context).textTheme.bodyLarge?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
               ),
-              subtitle: const Text('Fill LEBS lab form'),
+              subtitle: const Text('Fill LEBS lab results form'),
               trailing: ElevatedButton(
                 onPressed: () async => await Get.toNamed('${Routes.kForm}${FormType.kLEBS}/${FormType.kLab}'),
                 child: const Text('Start'),

@@ -20,7 +20,7 @@ class LebsLabFormWidget extends StatelessWidget {
           },
           child: Scaffold(
             appBar: AppBar(
-              title: const Text('Lebs Lab Form'),
+              title: const Text('Lebs Lab Results Form'),
               actions: controller.pages.last == 0
                   ? []
                   : [
