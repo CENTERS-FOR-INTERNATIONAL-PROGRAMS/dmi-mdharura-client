@@ -24,7 +24,7 @@ class LabEditWidget extends StatelessWidget {
           },
           child: Scaffold(
             appBar: AppBar(
-              title: Text('${type.toUpperCase()} Lab Form'),
+              title: Text('${type.toUpperCase()} Lab Results Form'),
               actions: controller.pages.last == 0
                   ? []
                   : [

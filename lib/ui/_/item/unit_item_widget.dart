@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:m_dharura/constant/data_list.dart';
 import 'package:m_dharura/constant/routes.dart';
 import 'package:m_dharura/model/unit.dart';
 
@@ -9,13 +10,7 @@ class UnitItemWidget extends StatelessWidget {
   final Function? onRemove;
   final Function? onStateChanged;
 
-  const UnitItemWidget(
-      {Key? key,
-      required this.unit,
-      this.isPrimary = true,
-      this.onRemove,
-      this.onStateChanged})
-      : super(key: key);
+  const UnitItemWidget({Key? key, required this.unit, this.isPrimary = true, this.onRemove, this.onStateChanged}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -98,6 +93,30 @@ class UnitItemWidget extends StatelessWidget {
                   Get.back();
 
                   await Get.toNamed('${Routes.kDashboard}${unit.id}');
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.table_rows),
+                title: Text(
+                  'View users data list',
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+                onTap: () async {
+                  Get.back();
+
+                  await Get.toNamed('${Routes.kDatalist}${DatalistType.kUser}/${unit.id}');
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.table_rows),
+                title: Text(
+                  'View tasks data list',
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+                onTap: () async {
+                  Get.back();
+
+                  await Get.toNamed('${Routes.kDatalist}${DatalistType.kTask}/${unit.id}');
                 },
               ),
               if (unit.parent != null)

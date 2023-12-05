@@ -120,12 +120,12 @@ class CebsWidget extends ResponsiveWidget<CebsController> {
             ),
             ListTile(
               title: Text(
-                'CEBS Lab',
+                'CEBS Lab Results',
                 style: Theme.of(screen.context).textTheme.bodyLarge?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
               ),
-              subtitle: const Text('Fill CEBS lab form'),
+              subtitle: const Text('Fill CEBS Lab Results Form'),
               trailing: ElevatedButton(
                 onPressed: () async => await Get.toNamed('${Routes.kForm}${FormType.kCEBS}/${FormType.kLab}'),
                 child: const Text('Start'),

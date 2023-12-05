@@ -120,12 +120,12 @@ class HebsWidget extends ResponsiveWidget<HebsController> {
             ),
             ListTile(
               title: Text(
-                'HEBS Lab',
+                'HEBS Lab Results',
                 style: Theme.of(screen.context).textTheme.bodyLarge?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
               ),
-              subtitle: const Text('Fill HEBS lab form'),
+              subtitle: const Text('Fill HEBS lab results form'),
               trailing: ElevatedButton(
                 onPressed: () async => await Get.toNamed('${Routes.kForm}${FormType.kHEBS}/${FormType.kLab}'),
                 child: const Text('Start'),

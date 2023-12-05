@@ -6,6 +6,7 @@ import 'package:m_dharura/ui/auth/auth_widget.dart';
 import 'package:m_dharura/ui/auth/verify_widget.dart';
 import 'package:m_dharura/ui/cebs/cebs_widget.dart';
 import 'package:m_dharura/ui/dashboard/dashboard_widget.dart';
+import 'package:m_dharura/ui/datalist/datalist_widget.dart';
 import 'package:m_dharura/ui/form/form_widget.dart';
 import 'package:m_dharura/ui/hebs/hebs_widget.dart';
 import 'package:m_dharura/ui/history/history_widget.dart';
@@ -69,8 +70,7 @@ final kRoutes = [
     page: () => MessageWidget(
       title: 'Form Sent',
       subtitle: 'Form sent successfully',
-      description:
-          'You have sent a new form successfully. The task is completed and escalated to your supervisors for follow up.',
+      description: 'You have sent a new form successfully. The task is completed and escalated to your supervisors for follow up.',
     ),
   ),
   GetPage(
@@ -156,6 +156,13 @@ final kRoutes = [
     name: '${Routes.kTask}:taskId',
     page: () => TaskWidget(
       taskId: Get.parameters['taskId']!,
+    ),
+  ),
+  GetPage(
+    name: '${Routes.kDatalist}:type/:unitId',
+    page: () => DatalistWidget(
+      type: Get.parameters['type']!,
+      unitId: Get.parameters['unitId']!,
     ),
   ),
 ];

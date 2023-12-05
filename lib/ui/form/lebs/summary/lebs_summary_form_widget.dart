@@ -74,7 +74,6 @@ class LebsSummaryFormWidget extends StatelessWidget {
                                 'Completed and closed',
                                 'Ongoing',
                                 'Escalated',
-                                'Not started',
                               ],
                               onChanged: (String value) => controller.form.update((val) => val?.eventStatus = value),
                             ),
@@ -89,7 +88,7 @@ class LebsSummaryFormWidget extends StatelessWidget {
                             ),
                             InputWidget(
                               question: 'What is the cause?',
-                              hintText: 'Type...',
+                              hintText: 'Type the full disease, hazard or condition name..',
                               position: controller.pages.last,
                               total: controller.total,
                               value: controller.form.value.cause,

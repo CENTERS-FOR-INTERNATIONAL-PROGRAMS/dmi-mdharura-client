@@ -35,6 +35,9 @@ BaseResponse _$BaseResponseFromJson(Map<String, dynamic> json) => BaseResponse()
   ..role = json['role'] == null
       ? null
       : Role.fromJson(json['role'] as Map<String, dynamic>)
+  ..file = json['file'] == null
+      ? null
+      : File.fromJson(json['file'] as Map<String, dynamic>)
   ..dashboards = (json['dashboards'] as List<dynamic>?)
       ?.map((e) => Dashboard.fromJson(e as Map<String, dynamic>))
       .toList()
@@ -65,6 +68,7 @@ Map<String, dynamic> _$BaseResponseToJson(BaseResponse instance) {
   writeNotNull('task', instance.task);
   writeNotNull('rolePage', instance.rolePage);
   writeNotNull('role', instance.role);
+  writeNotNull('file', instance.file);
   writeNotNull('dashboards', instance.dashboards);
   writeNotNull('notification', instance.appNotification);
   writeNotNull('notificationPage', instance.appNotificationPage);

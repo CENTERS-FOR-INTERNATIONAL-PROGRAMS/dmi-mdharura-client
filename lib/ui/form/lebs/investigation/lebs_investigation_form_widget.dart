@@ -259,8 +259,7 @@ class LebsInvestigationFormWidget extends StatelessWidget {
                               }),
                             ),
                             SelectWidget(
-                              question:
-                                  'Where does the assessed event fall in the below categorization matrix?\nb. Is the event considered an infectious or non-infectious?',
+                              question: 'Where does the assessed event fall in the below categorization matrix?\nb. Is the event considered infectious?',
                               position: controller.pages.last,
                               total: controller.total,
                               values: controller.form.value.isEventInfectious == null ? [] : [controller.form.value.isEventInfectious!],
@@ -268,7 +267,6 @@ class LebsInvestigationFormWidget extends StatelessWidget {
                                 'Yes',
                                 'No',
                                 'Don\'t Know',
-                                'Not Applicable',
                               ],
                               onChanged: (String value) => controller.form.update((val) => val?.isEventInfectious = value),
                             ),
@@ -295,7 +293,6 @@ class LebsInvestigationFormWidget extends StatelessWidget {
                                 'Human musculoskeletal system',
                                 'Skeletal muscle system',
                                 'Don\'t Know',
-                                'Not Applicable',
                               ],
                               onChanged: (String value) => controller.form.update((val) {
                                 val?.systemsAffectedByEvent ??= [];

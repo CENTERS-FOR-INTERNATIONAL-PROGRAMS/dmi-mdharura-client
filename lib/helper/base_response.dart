@@ -3,6 +3,7 @@ import 'package:m_dharura/model/app_notification.dart';
 import 'package:m_dharura/model/app_notification_page.dart';
 import 'package:m_dharura/model/dashboard.dart';
 import 'package:m_dharura/model/error.dart';
+import 'package:m_dharura/model/file.dart';
 import 'package:m_dharura/model/role.dart';
 import 'package:m_dharura/model/role_page.dart';
 import 'package:m_dharura/model/task.dart';
@@ -35,6 +36,8 @@ class BaseResponse {
   RolePage? rolePage;
 
   Role? role;
+
+  File? file;
 
   List<Dashboard>? dashboards;
 

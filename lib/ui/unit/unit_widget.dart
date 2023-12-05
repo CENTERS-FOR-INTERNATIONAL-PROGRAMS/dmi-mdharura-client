@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:m_dharura/constant/data_list.dart';
 import 'package:m_dharura/constant/routes.dart';
 import 'package:m_dharura/ui/_/dialog_widget.dart';
 import 'package:m_dharura/ui/_/responsive_widget.dart';
@@ -59,18 +60,13 @@ class UnitWidget extends ResponsiveWidget<UnitController> {
                       ),
                       Text(
                         '${controller.unit.value!.state.capitalize} · ${controller.unit.value!.type}',
-                        style: Theme.of(screen.context)
-                            .textTheme
-                            .bodySmall
-                            ?.copyWith(
+                        style: Theme.of(screen.context).textTheme.bodySmall?.copyWith(
                               color: Colors.white,
                             ),
                       ),
                     ],
                   ),
-                  backgroundColor: controller.unit.value!.state == 'live'
-                      ? Colors.lightGreen
-                      : Colors.black,
+                  backgroundColor: controller.unit.value!.state == 'live' ? Colors.lightGreen : Colors.black,
                   actions: [
                     if (controller.unit.value != null)
                       IconButton(
@@ -86,10 +82,7 @@ class UnitWidget extends ResponsiveWidget<UnitController> {
                                     ListTile(
                                       title: Text(
                                         unit.name,
-                                        style: Theme.of(screen.context)
-                                            .textTheme
-                                            .bodyLarge
-                                            ?.copyWith(
+                                        style: Theme.of(screen.context).textTheme.bodyLarge?.copyWith(
                                               fontWeight: FontWeight.bold,
                                             ),
                                       ),
@@ -99,25 +92,44 @@ class UnitWidget extends ResponsiveWidget<UnitController> {
                                       onTap: () async {
                                         Get.back();
 
-                                        await Get.toNamed(
-                                            '${Routes.kUnit}${unit.id}');
+                                        await Get.toNamed('${Routes.kUnit}${unit.id}');
                                       },
                                     ),
                                     const Divider(),
                                     ListTile(
-                                      leading:
-                                          const Icon(Icons.stacked_bar_chart),
+                                      leading: const Icon(Icons.stacked_bar_chart),
                                       title: Text(
                                         'View dashboard',
-                                        style: Theme.of(screen.context)
-                                            .textTheme
-                                            .bodyLarge,
+                                        style: Theme.of(screen.context).textTheme.bodyLarge,
                                       ),
                                       onTap: () async {
                                         Get.back();
 
-                                        await Get.toNamed(
-                                            '${Routes.kDashboard}${unit.id}');
+                                        await Get.toNamed('${Routes.kDashboard}${unit.id}');
+                                      },
+                                    ),
+                                    ListTile(
+                                      leading: const Icon(Icons.table_rows),
+                                      title: Text(
+                                        'View users data list',
+                                        style: Theme.of(screen.context).textTheme.bodyLarge,
+                                      ),
+                                      onTap: () async {
+                                        Get.back();
+
+                                        await Get.toNamed('${Routes.kDatalist}${DatalistType.kUser}/${unit.id}');
+                                      },
+                                    ),
+                                    ListTile(
+                                      leading: const Icon(Icons.table_rows),
+                                      title: Text(
+                                        'View tasks data list',
+                                        style: Theme.of(screen.context).textTheme.bodyLarge,
+                                      ),
+                                      onTap: () async {
+                                        Get.back();
+
+                                        await Get.toNamed('${Routes.kDatalist}${DatalistType.kTask}/${unit.id}');
                                       },
                                     ),
                                     if (unit.parent != null)
@@ -125,39 +137,28 @@ class UnitWidget extends ResponsiveWidget<UnitController> {
                                         leading: const Icon(Icons.call_made),
                                         title: Text(
                                           'View parent level',
-                                          style: Theme.of(screen.context)
-                                              .textTheme
-                                              .bodyLarge,
+                                          style: Theme.of(screen.context).textTheme.bodyLarge,
                                         ),
                                         onTap: () async {
                                           Get.back();
 
-                                          await Get.toNamed(
-                                              '${Routes.kUnit}${unit.parent}');
+                                          await Get.toNamed('${Routes.kUnit}${unit.parent}');
                                         },
                                       ),
                                     SwitchListTile(
                                       title: Text(
                                         'State',
-                                        style: Theme.of(screen.context)
-                                            .textTheme
-                                            .bodyLarge,
+                                        style: Theme.of(screen.context).textTheme.bodyLarge,
                                       ),
-                                      subtitle:
-                                          Text('Currently in ${unit.state}'),
+                                      subtitle: Text('Currently in ${unit.state}'),
                                       value: unit.state == 'live',
                                       onChanged: (value) async {
                                         Get.back();
 
                                         await Get.dialog(DialogWidget(
-                                          title:
-                                              'Change ${unit.name}\'s state?',
-                                          content:
-                                              'You are about to change ${unit.name}\'s state to ${value ? 'live' : 'test'}. Please confirm.',
-                                          onConfirm: () async =>
-                                              await controller.updateState(
-                                                  unit.id!,
-                                                  value ? 'live' : 'test'),
+                                          title: 'Change ${unit.name}\'s state?',
+                                          content: 'You are about to change ${unit.name}\'s state to ${value ? 'live' : 'test'}. Please confirm.',
+                                          onConfirm: () async => await controller.updateState(unit.id!, value ? 'live' : 'test'),
                                           confirmText: 'Change',
                                         ));
                                       },
@@ -166,10 +167,7 @@ class UnitWidget extends ResponsiveWidget<UnitController> {
                                     ListTile(
                                       title: Text(
                                         'Remove',
-                                        style: Theme.of(screen.context)
-                                            .textTheme
-                                            .bodyLarge
-                                            ?.copyWith(
+                                        style: Theme.of(screen.context).textTheme.bodyLarge?.copyWith(
                                               color: Colors.red,
                                             ),
                                       ),
@@ -178,10 +176,8 @@ class UnitWidget extends ResponsiveWidget<UnitController> {
 
                                         await Get.dialog(DialogWidget(
                                           title: 'Remove ${unit.name}?',
-                                          content:
-                                              'You are about to remove ${unit.name}. Please confirm.',
-                                          onConfirm: () async =>
-                                              await controller.remove(unit.id!),
+                                          content: 'You are about to remove ${unit.name}. Please confirm.',
+                                          onConfirm: () async => await controller.remove(unit.id!),
                                           confirmText: 'Remove',
                                         ));
                                       },

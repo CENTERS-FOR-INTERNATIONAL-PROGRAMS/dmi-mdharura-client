@@ -53,7 +53,7 @@ class TaskItemWidget extends StatelessWidget {
                 },
         ),
         TaskFormItem(
-          title: 'LEBS Lab',
+          title: 'LEBS Lab Results',
           date: task.lebs != null && task.lebs?.labForm != null ? task.lebs?.labForm?.createdAt : null,
           user: task.lebs != null && task.lebs?.investigationForm != null && task.lebs?.investigationForm?.isSamplesCollected != "N/A"
               ? task.lebs?.labForm?.user
@@ -106,7 +106,7 @@ class TaskItemWidget extends StatelessWidget {
     } else if (task.signal.startsWith('h')) {
       return [
         TaskFormItem(
-          title: 'HEBS Lab',
+          title: 'HEBS Lab Results',
           date: task.hebs != null && task.hebs?.labForm != null ? task.hebs?.labForm?.createdAt : null,
           user: task.hebs != null && task.hebs?.investigationForm != null && task.hebs?.investigationForm?.isLabSamplesCollected != "N/A"
               ? task.hebs?.labForm?.user
@@ -195,7 +195,7 @@ class TaskItemWidget extends StatelessWidget {
                 },
         ),
         TaskFormItem(
-          title: 'VEBS Lab',
+          title: 'VEBS Lab Results',
           date: task.vebs != null && task.vebs?.labForm != null ? task.vebs?.labForm?.createdAt : null,
           user: task.vebs != null && task.vebs?.investigationForm != null && task.vebs?.investigationForm?.isLabSamplesCollected != "N/A"
               ? task.vebs?.labForm?.user
@@ -272,7 +272,7 @@ class TaskItemWidget extends StatelessWidget {
                 },
         ),
         TaskFormItem(
-          title: 'CEBS Lab',
+          title: 'CEBS Lab Results',
           date: task.cebs != null && task.cebs?.labForm != null ? task.cebs?.labForm?.createdAt : null,
           user: task.cebs != null && task.cebs?.investigationForm != null && task.cebs?.investigationForm?.isLabSamplesCollected != "N/A"
               ? task.cebs?.labForm?.user

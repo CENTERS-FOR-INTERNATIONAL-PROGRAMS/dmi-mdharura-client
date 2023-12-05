@@ -215,7 +215,7 @@ class TaskWidget extends ResponsiveWidget<TaskController> {
                             ),
                           if (controller.task.value!.cebs!.labForm != null)
                             TaskFormItemWidget(
-                              title: 'CEBS Lab',
+                              title: 'CEBS Lab Results',
                               date: controller.task.value!.cebs!.labForm!.createdAt,
                               user: controller.task.value!.cebs!.labForm!.user,
                               onClick: () async {
@@ -275,7 +275,7 @@ class TaskWidget extends ResponsiveWidget<TaskController> {
                             ),
                           if (controller.task.value!.hebs!.labForm != null)
                             TaskFormItemWidget(
-                              title: 'HEBS Lab',
+                              title: 'HEBS Lab Results',
                               date: controller.task.value!.hebs!.labForm!.createdAt,
                               user: controller.task.value!.hebs!.labForm!.user,
                               onClick: () async {
@@ -347,7 +347,7 @@ class TaskWidget extends ResponsiveWidget<TaskController> {
                             ),
                           if (controller.task.value!.vebs!.labForm != null)
                             TaskFormItemWidget(
-                              title: 'VEBS Lab',
+                              title: 'VEBS Lab Results',
                               date: controller.task.value!.vebs!.labForm!.createdAt,
                               user: controller.task.value!.vebs!.labForm!.user,
                               onClick: () async {
@@ -415,7 +415,7 @@ class TaskWidget extends ResponsiveWidget<TaskController> {
                             ),
                           if (controller.task.value!.lebs!.labForm != null)
                             TaskFormItemWidget(
-                              title: 'LEBS Lab',
+                              title: 'LEBS Lab Results',
                               date: controller.task.value!.lebs!.labForm!.createdAt,
                               user: controller.task.value!.lebs!.labForm!.user,
                               onClick: () async {
