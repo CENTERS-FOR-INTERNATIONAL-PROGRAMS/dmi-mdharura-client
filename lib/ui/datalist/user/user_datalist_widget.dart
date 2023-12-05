@@ -24,20 +24,20 @@ class UserDatalistWidget extends ResponsiveWidget<UserDatalistController> {
       );
 
   @override
-  init() {
-    controller.fetch(refresh: true);
-  }
+  init() {}
 
   @override
-  Widget? tablet() => Obx(
-        () => Scaffold(
-          appBar: AppBar(
-            title: Text(
-              controller.unit.value == null ? 'UserDatalist' : controller.unit.value!.name,
+  Widget? tablet() => Scaffold(
+        appBar: AppBar(
+          title: Obx(
+            () => Text(
+              controller.unit.value == null ? 'Userlist' : controller.unit.value!.name,
             ),
-            backgroundColor: controller.unit.value?.state == 'Test' ? Colors.black : Colors.lightGreen,
           ),
-          body: controller.isFetching.isTrue && controller.roles.isEmpty
+          backgroundColor: controller.unit.value?.state == 'Test' ? Colors.black : Colors.lightGreen,
+        ),
+        body: Obx(
+          () => controller.isFetching.isTrue && controller.roles.isEmpty
               ? const Center(
                   child: CircularProgressIndicator(),
                 )

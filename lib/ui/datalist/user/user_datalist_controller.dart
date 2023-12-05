@@ -45,7 +45,10 @@ class UserDatalistController extends GetxController {
       roles.clear();
 
       rolePage.value = null;
-    } else if (rolePage.value != null && rolePage.value!.isEnd) {
+    } else if (rolePage.value != null && rolePage.value!.isEnd && direction == "next") {
+      isFetching.value = false;
+      return;
+    } else if (rolePage.value != null && rolePage.value!.page == 1 && direction == "prev") {
       isFetching.value = false;
       return;
     }

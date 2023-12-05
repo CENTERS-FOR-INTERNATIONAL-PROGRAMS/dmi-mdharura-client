@@ -25,32 +25,31 @@ class TaskDatalistWidget extends ResponsiveWidget<TaskDatalistController> {
       );
 
   @override
-  init() {
-    controller.fetch(refresh: true);
-  }
+  init() {}
 
   @override
-  Widget? tablet() => Obx(
-        () => Scaffold(
-          appBar: AppBar(
-            title: Text(
-              controller.unit.value == null ? 'TaskDatalist' : controller.unit.value!.name,
-            ),
-            backgroundColor: controller.state.value == 'Test' ? Colors.black : Colors.lightGreen,
-            actions: [
-              if (controller.tasks.isNotEmpty)
-                IconButton(
-                  icon: controller.isDownloading.isTrue
-                      ? const CircularProgressIndicator(
-                          backgroundColor: Colors.white,
-                          strokeWidth: 2,
-                        )
-                      : const Icon(Icons.download),
-                  onPressed: () async => controller.download(),
-                )
-            ],
-          ),
-          body: controller.isFetching.isTrue && controller.tasks.isEmpty
+  Widget? tablet() => Scaffold(
+        appBar: AppBar(
+          title: Obx(() => Text(
+                controller.unit.value == null ? 'Tasklist' : controller.unit.value!.name,
+              )),
+          backgroundColor: controller.state.value == 'Test' ? Colors.black : Colors.lightGreen,
+          actions: [
+            Obx(() => controller.tasks.isNotEmpty
+                ? IconButton(
+                    icon: controller.isDownloading.isTrue
+                        ? const CircularProgressIndicator(
+                            backgroundColor: Colors.white,
+                            strokeWidth: 2,
+                          )
+                        : const Icon(Icons.download),
+                    onPressed: () async => controller.download(),
+                  )
+                : const SizedBox.shrink())
+          ],
+        ),
+        body: Obx(
+          () => controller.isFetching.isTrue && controller.tasks.isEmpty
               ? const Center(
                   child: CircularProgressIndicator(),
                 )

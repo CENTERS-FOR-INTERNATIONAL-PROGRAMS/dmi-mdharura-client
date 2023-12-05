@@ -50,7 +50,10 @@ class TaskDatalistController extends GetxController {
       tasks.clear();
 
       taskPage.value = null;
-    } else if (taskPage.value != null && taskPage.value!.isEnd) {
+    } else if (taskPage.value != null && taskPage.value!.isEnd && direction == "next") {
+      isFetching.value = false;
+      return;
+    } else if (taskPage.value != null && taskPage.value!.page == 1 && direction == "prev") {
       isFetching.value = false;
       return;
     }
