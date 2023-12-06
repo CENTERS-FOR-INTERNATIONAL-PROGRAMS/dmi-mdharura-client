@@ -24,10 +24,8 @@ class DashboardController extends GetxController {
 
   DashboardController({required this.unitId});
 
-  Rx<DateTime> dateStart = Rx<DateTime>(
-      DateTime.now().subtract(const Duration(days: 7)).startOfDay());
-  Rx<DateTime> dateEnd =
-      Rx<DateTime>(DateTime.now().subtract(const Duration(days: 1)).endOfDay());
+  Rx<DateTime> dateStart = Rx<DateTime>(DateTime.now().subtract(const Duration(days: 7)).startOfDay());
+  Rx<DateTime> dateEnd = Rx<DateTime>(DateTime.now().subtract(const Duration(days: 1)).endOfDay());
 
   @override
   void onInit() async {
@@ -60,8 +58,7 @@ class DashboardController extends GetxController {
 
       dashboards.clear();
 
-      dashboards
-          .addAll((await _analyticsApi.retrieve(query)).data!.dashboards!);
+      dashboards.addAll((await _analyticsApi.retrieve(query)).data!.dashboards!);
     } catch (e) {
       Util.toast(e);
     }
